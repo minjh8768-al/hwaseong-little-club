@@ -34,7 +34,7 @@
      taller so the tiles don't look small next to the hero above them. */
   .about-tile { aspect-ratio: 4/3; }
   @media (min-width: 900px) {
-    .about-tile { aspect-ratio: 2/3; }
+    .about-tile { aspect-ratio: auto; height: var(--tile-h, 500px); }
   }
 
   /* Cross-fade to a second photo on hover, when one is set. */

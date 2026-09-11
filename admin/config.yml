@@ -53,12 +53,42 @@ collections:
             collapsed: true
             fields:
               - { label: "소개 문구", name: "text", widget: "text" }
+              - label: "카드 세로 크기 (PC 화면, px 단위, 기본 500)"
+                name: "tile_height"
+                widget: "number"
+                required: false
+                default: 500
+                value_type: "int"
               - { label: "사진 1 - 구단소개", name: "photo", widget: "image", required: false }
               - { label: "사진 1 - 마우스 올렸을 때 바뀌는 사진 (선택)", name: "photo_hover", widget: "image", required: false }
+              - label: "사진 1 - 사진 위치"
+                name: "photo_position"
+                widget: "select"
+                default: "center"
+                options:
+                  - { label: "위", value: "top" }
+                  - { label: "가운데", value: "center" }
+                  - { label: "아래", value: "bottom" }
               - { label: "사진 2 - 선수반안내", name: "photo2", widget: "image", required: false }
               - { label: "사진 2 - 마우스 올렸을 때 바뀌는 사진 (선택)", name: "photo2_hover", widget: "image", required: false }
+              - label: "사진 2 - 사진 위치"
+                name: "photo2_position"
+                widget: "select"
+                default: "center"
+                options:
+                  - { label: "위", value: "top" }
+                  - { label: "가운데", value: "center" }
+                  - { label: "아래", value: "bottom" }
               - { label: "사진 3 - 육성반안내", name: "photo3", widget: "image", required: false }
               - { label: "사진 3 - 마우스 올렸을 때 바뀌는 사진 (선택)", name: "photo3_hover", widget: "image", required: false }
+              - label: "사진 3 - 사진 위치"
+                name: "photo3_position"
+                widget: "select"
+                default: "center"
+                options:
+                  - { label: "위", value: "top" }
+                  - { label: "가운데", value: "center" }
+                  - { label: "아래", value: "bottom" }
 
           - label: "선수단 · 코칭스태프"
             name: "roster"
