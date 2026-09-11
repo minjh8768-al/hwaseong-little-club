@@ -38,32 +38,6 @@ collections:
                   - { label: "숫자/값", name: "value", widget: "string" }
                   - { label: "설명", name: "label", widget: "string" }
 
-          - label: "공지 · 소식"
-            name: "news"
-            widget: "list"
-            fields:
-              - { label: "날짜 표시 (예: 공지 · 2026.09.05)", name: "date_label", widget: "string" }
-              - { label: "제목", name: "title", widget: "string" }
-              - { label: "내용", name: "body", widget: "text" }
-              - { label: "사진", name: "image", widget: "image", required: false }
-
-          - label: "경기 일정"
-            name: "schedule"
-            widget: "list"
-            fields:
-              - { label: "일자 (예: 09.13 (일))", name: "date", widget: "string" }
-              - { label: "대회", name: "competition", widget: "string" }
-              - { label: "상대", name: "opponent", widget: "string" }
-              - { label: "장소", name: "venue", widget: "string" }
-              - label: "결과 종류"
-                name: "result_type"
-                widget: "select"
-                options:
-                  - { label: "예정", value: "upcoming" }
-                  - { label: "승", value: "win" }
-                  - { label: "패", value: "lose" }
-              - { label: "결과 표시 텍스트 (예: 승 7 : 4, 예정)", name: "result_text", widget: "string" }
-
           - label: "구단 소개"
             name: "about"
             widget: "object"
@@ -81,11 +55,37 @@ collections:
               - { label: "포지션 · 학년", name: "position", widget: "string" }
               - { label: "프로필 사진", name: "photo", widget: "image", required: false }
 
+          - label: "공지 · 소식"
+            name: "news"
+            widget: "list"
+            fields:
+              - { label: "날짜 표시 (예: 공지 · 2026.09.05)", name: "date_label", widget: "string" }
+              - { label: "제목", name: "title", widget: "string" }
+              - { label: "내용", name: "body", widget: "text" }
+              - { label: "사진", name: "image", widget: "image", required: false }
+
           - label: "갤러리"
             name: "gallery"
             widget: "list"
             fields:
               - { label: "사진", name: "photo", widget: "image", required: false }
+
+          - label: "경기 일정"
+            name: "schedule"
+            widget: "list"
+            fields:
+              - { label: "일자 (예: 09.13 (일))", name: "date", widget: "string" }
+              - { label: "대회", name: "competition", widget: "string" }
+              - { label: "상대", name: "opponent", widget: "string" }
+              - { label: "장소", name: "venue", widget: "string" }
+              - label: "결과 종류"
+                name: "result_type"
+                widget: "select"
+                options:
+                  - { label: "예정", value: "upcoming" }
+                  - { label: "승", value: "win" }
+                  - { label: "패", value: "lose" }
+              - { label: "결과 표시 텍스트 (예: 승 7 : 4, 예정)", name: "result_text", widget: "string" }
 
           - label: "SNS · 미디어"
             name: "sns"
