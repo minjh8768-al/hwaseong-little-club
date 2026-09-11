@@ -1,0 +1,67 @@
+{
+  "hero": {
+    "kicker1": "SINCE 2020",
+    "kicker2": "HWASEONG CITY · SEOBU",
+    "title_line1": "Hwaseong",
+    "title_line2": "Little Club",
+    "subtitle": "화성시 서부리틀야구단. 초등부 유소년 야구단으로 기본기와 팀워크, 그리고 야구를 즐기는 태도를 함께 배웁니다.",
+    "image": "",
+    "stats": [
+      { "value": "2020", "label": "창단" },
+      { "value": "38", "label": "등록 선수" },
+      { "value": "5", "label": "코칭스태프" },
+      { "value": "주 3회", "label": "정규 훈련" }
+    ]
+  },
+  "news": [
+    {
+      "date_label": "공지 · 2026.09.05",
+      "title": "2026 하반기 신입단원 모집 안내",
+      "body": "초등 1~6학년 대상 신입단원을 모집합니다. 모집 기간과 절차를 확인해 주세요.",
+      "image": ""
+    },
+    {
+      "date_label": "경기 · 2026.08.30",
+      "title": "경기도 유소년 리그 8월 결과",
+      "body": "8월 리그 경기 결과와 주요 기록을 정리했습니다.",
+      "image": ""
+    },
+    {
+      "date_label": "안내 · 2026.08.18",
+      "title": "가을 훈련 일정 변경 안내",
+      "body": "9월부터 주말 훈련 시간이 조정됩니다. 변경된 시간표를 확인해 주세요.",
+      "image": ""
+    }
+  ],
+  "schedule": [
+    { "date": "09.13 (일)", "competition": "경기도 유소년 리그", "opponent": "수원 리틀", "venue": "화성 서부 야구장", "result_type": "upcoming", "result_text": "예정" },
+    { "date": "09.20 (일)", "competition": "경기도 유소년 리그", "opponent": "평택 리틀", "venue": "평택 시립구장", "result_type": "upcoming", "result_text": "예정" },
+    { "date": "09.27 (일)", "competition": "친선경기", "opponent": "안산 리틀", "venue": "화성 서부 야구장", "result_type": "upcoming", "result_text": "예정" },
+    { "date": "08.30 (일)", "competition": "경기도 유소년 리그", "opponent": "용인 리틀", "venue": "용인 신갈구장", "result_type": "win", "result_text": "승 7 : 4" },
+    { "date": "08.23 (일)", "competition": "경기도 유소년 리그", "opponent": "오산 리틀", "venue": "화성 서부 야구장", "result_type": "lose", "result_text": "패 2 : 5" }
+  ],
+  "about": {
+    "text": "화성시 서부리틀야구단은 2020년 창단한 유소년 야구단입니다. 승부보다 기본기와 태도를 먼저 가르치고, 모든 단원이 경기에 나설 기회를 갖도록 운영합니다.",
+    "photo": ""
+  },
+  "roster": [
+    { "number": "10", "name": "김민준", "position": "PITCHER · 6학년", "photo": "" },
+    { "number": "7", "name": "이서준", "position": "CATCHER · 5학년", "photo": "" },
+    { "number": "23", "name": "박도윤", "position": "INFIELD · 5학년", "photo": "" },
+    { "number": "31", "name": "최하준", "position": "OUTFIELD · 4학년", "photo": "" },
+    { "number": "HC", "name": "정우성", "position": "HEAD COACH", "photo": "" },
+    { "number": "AC", "name": "한지호", "position": "ASSISTANT COACH", "photo": "" }
+  ],
+  "gallery": [
+    { "photo": "" },
+    { "photo": "" },
+    { "photo": "" },
+    { "photo": "" }
+  ],
+  "join": {
+    "training_location": "화성시 서부 야구장",
+    "training_time": "토·일 09:00 – 13:00, 수 17:00 – 19:00",
+    "phone": "031-000-0000",
+    "email": "hwaseongwest@example.com"
+  }
+}

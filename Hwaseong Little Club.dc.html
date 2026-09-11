@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/industry-54b9aa32-a678-416e-88f1-516c816cb45b/styles.css">
+<script src="_ds/industry-54b9aa32-a678-416e-88f1-516c816cb45b/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:"Noto Sans KR", var(--font-body); }
+  h1,h2,h3,h4 { font-family:"Barlow Condensed","Noto Sans KR",sans-serif; }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: #d1491f; }
+</style>
+</helmet>
+
+<div style="background:var(--color-bg); color:var(--color-text); min-height:100vh">
+
+  <header style="background:#fff; color:#16233f; position:sticky; top:0; z-index:40; border-bottom:3px solid #d1491f; box-shadow:0 1px 6px rgba(22,35,63,.08)">
+    <div style="max-width:1240px; margin:0 auto; padding:10px 24px; display:flex; align-items:center; gap:16px; flex-wrap:wrap">
+      <a href="#top" style="display:flex; align-items:center; gap:12px; color:#16233f">
+        <img src="assets/logo-v2.png" alt="화성시 서부리틀야구단" style="width:46px; height:46px; object-fit:contain">
+        <span style="display:flex; flex-direction:column; line-height:1.05">
+          <span style="font-family:'Barlow Condensed',sans-serif; font-size:20px; letter-spacing:.06em; text-transform:uppercase">Hwaseong Little Club</span>
+          <span style="font-size:11px; letter-spacing:.18em; color:var(--color-neutral-700)">화성시 서부리틀야구단</span>
+        </span>
+      </a>
+      <nav style="margin-left:auto; display:flex; gap:2px; flex-wrap:wrap; justify-content:flex-end">
+        <a href="#about" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:16px; letter-spacing:.04em; padding:8px 14px; font-weight:600">구단소개</a>
+        <a href="#roster" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:16px; letter-spacing:.04em; padding:8px 14px; font-weight:600">선수단</a>
+        <a href="#schedule" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:16px; letter-spacing:.04em; padding:8px 14px; font-weight:600">경기일정</a>
+        <a href="#news" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:16px; letter-spacing:.04em; padding:8px 14px; font-weight:600">공지·소식</a>
+        <a href="#gallery" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:16px; letter-spacing:.04em; padding:8px 14px; font-weight:600">갤러리</a>
+        <a href="#join" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:16px; letter-spacing:.04em; padding:8px 14px; font-weight:600">입단안내</a>
+      </nav>
+      <a href="#join" class="btn btn-primary" style="background:#d1491f; color:#fff; border-color:#d1491f; font-size:14px; padding:9px 16px; white-space:nowrap; flex:none">입단 문의</a>
+    </div>
+  </header>
+
+  <section id="top" style="background:#16233f; color:#f2f2f3; position:relative; overflow:hidden">
+    <div style="position:absolute; inset:0; opacity:.5">
+      <image-slot id="hero-bg" shape="rect" placeholder="히어로 사진을 올려주세요 (경기/훈련 사진)"></image-slot>
+    </div>
+    <div style="position:absolute; inset:0; background:linear-gradient(90deg,#16233f 0%, rgba(22,35,63,.82) 55%, rgba(22,35,63,.35) 100%); pointer-events:none"></div>
+    <div style="position:relative; max-width:1240px; margin:0 auto; padding:96px 24px 88px; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr); gap:48px; align-items:center">
+      <div>
+        <div style="display:flex; gap:8px; margin-bottom:20px">
+          <span class="tag" style="background:#d1491f; color:#fff; border:0; letter-spacing:.12em">SINCE 2020</span>
+          <span class="tag tag-outline" style="color:#cfd9e6; border-color:rgba(255,255,255,.35); letter-spacing:.12em">HWASEONG CITY · SEOBU</span>
+        </div>
+        <h1 style="font-size:72px; line-height:.98; margin:0 0 18px; letter-spacing:-.01em; text-transform:uppercase">Hwaseong<br>Little Club</h1>
+        <p style="font-size:19px; max-width:540px; color:#d8e0ea; margin:0 0 28px">화성시 서부리틀야구단. 초등부 유소년 야구단으로 기본기와 팀워크, 그리고 야구를 즐기는 태도를 함께 배웁니다.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a href="#join" class="btn btn-primary" style="background:#d1491f; border-color:#d1491f; color:#fff; height:44px; padding:0 22px; font-size:16px">입단 신청하기</a>
+          <a href="#schedule" class="btn btn-secondary" style="border-color:rgba(255,255,255,.4); color:#f2f2f3; height:44px; padding:0 22px; font-size:16px">경기 일정 보기</a>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:center">
+        <img src="assets/logo-v2.png" alt="화성시 서부리틀야구단 엠블럼" style="width:100%; max-width:300px">
+      </div>
+    </div>
+    <div style="position:relative; border-top:1px solid rgba(255,255,255,.18)">
+      <div style="max-width:1240px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr))">
+        <div style="padding:22px 0"><div style="font-family:'Barlow Condensed',sans-serif; font-size:34px; line-height:1">2020</div><div style="font-size:12px; letter-spacing:.14em; color:#9fb3cf">창단</div></div>
+        <div style="padding:22px 0"><div style="font-family:'Barlow Condensed',sans-serif; font-size:34px; line-height:1">38</div><div style="font-size:12px; letter-spacing:.14em; color:#9fb3cf">등록 선수</div></div>
+        <div style="padding:22px 0"><div style="font-family:'Barlow Condensed',sans-serif; font-size:34px; line-height:1">5</div><div style="font-size:12px; letter-spacing:.14em; color:#9fb3cf">코칭스태프</div></div>
+        <div style="padding:22px 0"><div style="font-family:'Barlow Condensed',sans-serif; font-size:34px; line-height:1">주 3회</div><div style="font-size:12px; letter-spacing:.14em; color:#9fb3cf">정규 훈련</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news" style="max-width:1240px; margin:0 auto; padding:72px 24px">
+    <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:28px">
+      <h2 style="font-size:38px; margin:0; text-transform:uppercase; letter-spacing:.02em">공지 · 소식</h2>
+      <span style="font-size:12px; letter-spacing:.16em; color:var(--color-neutral-600)">NOTICE &amp; NEWS</span>
+      <a href="#news" style="margin-left:auto; font-size:14px">전체보기 →</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px">
+      <article class="card blueprint" style="padding:0; overflow:hidden">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="duotone" style="height:170px"><image-slot id="news-1" shape="rect" placeholder="소식 이미지"></image-slot></div>
+        <div style="padding:18px">
+          <div class="card-kicker" style="color:#d1491f">공지 · 2026.09.05</div>
+          <h3 class="card-title" style="font-size:22px">2026 하반기 신입단원 모집 안내</h3>
+          <p class="card-body" style="margin:0">초등 1~6학년 대상 신입단원을 모집합니다. 모집 기간과 절차를 확인해 주세요.</p>
+        </div>
+      </article>
+      <article class="card blueprint" style="padding:0; overflow:hidden">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="duotone" style="height:170px"><image-slot id="news-2" shape="rect" placeholder="소식 이미지"></image-slot></div>
+        <div style="padding:18px">
+          <div class="card-kicker" style="color:#d1491f">경기 · 2026.08.30</div>
+          <h3 class="card-title" style="font-size:22px">경기도 유소년 리그 8월 결과</h3>
+          <p class="card-body" style="margin:0">8월 리그 경기 결과와 주요 기록을 정리했습니다.</p>
+        </div>
+      </article>
+      <article class="card blueprint" style="padding:0; overflow:hidden">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="duotone" style="height:170px"><image-slot id="news-3" shape="rect" placeholder="소식 이미지"></image-slot></div>
+        <div style="padding:18px">
+          <div class="card-kicker" style="color:#d1491f">안내 · 2026.08.18</div>
+          <h3 class="card-title" style="font-size:22px">가을 훈련 일정 변경 안내</h3>
+          <p class="card-body" style="margin:0">9월부터 주말 훈련 시간이 조정됩니다. 변경된 시간표를 확인해 주세요.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="schedule" style="background:var(--color-neutral-200); border-top:1px solid var(--color-divider); border-bottom:1px solid var(--color-divider)">
+    <div style="max-width:1240px; margin:0 auto; padding:72px 24px">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:28px">
+        <h2 style="font-size:38px; margin:0; text-transform:uppercase">경기 일정</h2>
+        <span style="font-size:12px; letter-spacing:.16em; color:var(--color-neutral-600)">SCHEDULE</span>
+      </div>
+      <table class="table" style="width:100%">
+        <thead>
+          <tr><th style="text-align:left">일자</th><th style="text-align:left">대회</th><th style="text-align:left">상대</th><th style="text-align:left">장소</th><th style="text-align:left">결과</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>09.13 (일)</td><td>경기도 유소년 리그</td><td>수원 리틀</td><td>화성 서부 야구장</td><td><span class="tag tag-outline">예정</span></td></tr>
+          <tr><td>09.20 (일)</td><td>경기도 유소년 리그</td><td>평택 리틀</td><td>평택 시립구장</td><td><span class="tag tag-outline">예정</span></td></tr>
+          <tr><td>09.27 (일)</td><td>친선경기</td><td>안산 리틀</td><td>화성 서부 야구장</td><td><span class="tag tag-outline">예정</span></td></tr>
+          <tr><td>08.30 (일)</td><td>경기도 유소년 리그</td><td>용인 리틀</td><td>용인 신갈구장</td><td><span class="tag" style="background:#d1491f; color:#fff; border:0">승 7 : 4</span></td></tr>
+          <tr><td>08.23 (일)</td><td>경기도 유소년 리그</td><td>오산 리틀</td><td>화성 서부 야구장</td><td><span class="tag tag-neutral">패 2 : 5</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="about" style="max-width:1240px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:40px; align-items:center">
+    <div class="duotone blueprint" style="height:400px; aspect-ratio:auto; position:relative">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <image-slot id="about-photo" shape="rect" placeholder="팀 단체사진"></image-slot>
+    </div>
+    <div>
+      <span style="font-size:12px; letter-spacing:.16em; color:var(--color-neutral-600)">ABOUT THE CLUB</span>
+      <h2 style="font-size:38px; margin:6px 0 16px">구단 소개</h2>
+      <p style="font-size:16px; max-width:520px">화성시 서부리틀야구단은 2020년 창단한 유소년 야구단입니다. 승부보다 기본기와 태도를 먼저 가르치고, 모든 단원이 경기에 나설 기회를 갖도록 운영합니다.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-top:24px">
+        <div style="border-top:2px solid #16233f; padding-top:10px"><h4 style="font-size:19px; margin:0 0 4px">기본기 중심</h4><p style="font-size:14px; margin:0; color:var(--color-neutral-700)">캐치볼·주루·타격의 기초를 반복합니다.</p></div>
+        <div style="border-top:2px solid #16233f; padding-top:10px"><h4 style="font-size:19px; margin:0 0 4px">전원 출전</h4><p style="font-size:14px; margin:0; color:var(--color-neutral-700)">모든 단원에게 출전 기회를 보장합니다.</p></div>
+        <div style="border-top:2px solid #16233f; padding-top:10px"><h4 style="font-size:19px; margin:0 0 4px">안전한 훈련</h4><p style="font-size:14px; margin:0; color:var(--color-neutral-700)">연령별 부하를 조절한 훈련 프로그램.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roster" style="background:#16233f; color:#f2f2f3">
+    <div style="max-width:1240px; margin:0 auto; padding:72px 24px">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:28px">
+        <h2 style="font-size:38px; margin:0; text-transform:uppercase">선수단 · 코칭스태프</h2>
+        <span style="font-size:12px; letter-spacing:.16em; color:#9fb3cf">ROSTER</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px">
+        <sc-for list="{{ roster }}" as="p" hint-placeholder-count="4">
+          <div style="border:1px solid rgba(255,255,255,.25)">
+            <div style="aspect-ratio:3/4; position:relative"><image-slot id="{{ p.slotId }}" shape="rect" placeholder="프로필 사진"></image-slot></div>
+            <div style="padding:14px; display:flex; align-items:baseline; gap:10px">
+              <span style="font-family:'Barlow Condensed',sans-serif; font-size:30px; line-height:1; color:#d1491f">{{ p.number }}</span>
+              <span style="display:flex; flex-direction:column">
+                <span style="font-size:17px; font-weight:700">{{ p.name }}</span>
+                <span style="font-size:12px; letter-spacing:.1em; color:#9fb3cf">{{ p.position }}</span>
+              </span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" style="max-width:1240px; margin:0 auto; padding:72px 24px">
+    <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:28px">
+      <h2 style="font-size:38px; margin:0; text-transform:uppercase">갤러리</h2>
+      <span style="font-size:12px; letter-spacing:.16em; color:var(--color-neutral-600)">GALLERY</span>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px">
+      <div class="duotone" style="aspect-ratio:4/3; border:1px solid var(--color-divider)"><image-slot id="gal-1" shape="rect" placeholder="사진"></image-slot></div>
+      <div class="duotone" style="aspect-ratio:4/3; border:1px solid var(--color-divider)"><image-slot id="gal-2" shape="rect" placeholder="사진"></image-slot></div>
+      <div class="duotone" style="aspect-ratio:4/3; border:1px solid var(--color-divider)"><image-slot id="gal-3" shape="rect" placeholder="사진"></image-slot></div>
+      <div class="duotone" style="aspect-ratio:4/3; border:1px solid var(--color-divider)"><image-slot id="gal-4" shape="rect" placeholder="사진"></image-slot></div>
+    </div>
+  </section>
+
+  <section id="join" style="border-top:1px solid var(--color-divider); background:var(--color-neutral-200)">
+    <div style="max-width:1240px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:48px">
+      <div>
+        <span style="font-size:12px; letter-spacing:.16em; color:var(--color-neutral-600)">JOIN THE CLUB</span>
+        <h2 style="font-size:38px; margin:6px 0 16px">입단 안내</h2>
+        <p style="font-size:16px; max-width:480px">초등 1~6학년이면 누구나 지원할 수 있습니다. 아래 정보를 남겨주시면 담당 코치가 연락드립니다. 훈련 참관은 상시 가능합니다.</p>
+        <div style="margin-top:24px; font-size:15px; line-height:2">
+          <div>훈련장 · 화성시 서부 야구장</div>
+          <div>훈련일 · 토·일 09:00 – 13:00, 수 17:00 – 19:00</div>
+          <div>문의 · 031-000-0000 / hwaseongwest@example.com</div>
+        </div>
+      </div>
+      <form class="card blueprint" style="padding:24px" onSubmit="{{ onSubmit }}">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="display:grid; gap:14px">
+          <div class="field"><label>학생 이름</label><input class="input" placeholder="홍길동"></div>
+          <div class="field"><label>학년</label><input class="input" placeholder="초등 3학년"></div>
+          <div class="field"><label>보호자 연락처</label><input class="input" placeholder="010-0000-0000"></div>
+          <div class="field"><label>문의 내용</label><textarea class="input" placeholder="야구 경험, 참관 희망일 등을 적어주세요."></textarea></div>
+          <button type="submit" class="btn btn-primary btn-block" style="background:#d1491f; border-color:#d1491f; color:#fff; height:44px; font-size:16px">신청서 보내기</button>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:14px; color:var(--color-accent-700)">접수되었습니다. 담당 코치가 연락드리겠습니다.</div>
+          </sc-if>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer style="background:#0f1932; color:#9fb3cf">
+    <div style="max-width:1240px; margin:0 auto; padding:40px 24px; display:flex; gap:24px; flex-wrap:wrap; align-items:center">
+      <img src="assets/logo-v2.png" alt="" style="width:56px; height:56px; object-fit:contain">
+      <div style="font-size:13px; line-height:1.8">
+        <div style="color:#f2f2f3; font-family:'Barlow Condensed',sans-serif; font-size:18px; letter-spacing:.08em">HWASEONG LITTLE CLUB · 화성시 서부리틀야구단</div>
+        <div>경기도 화성시 · 031-000-0000 · hwaseongwest@example.com</div>
+        <div>© 2026 Hwaseong Seobu Little Baseball Club. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { sent: false };
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      roster: [
+        { slotId: 'p1', number: '10', name: '김민준', position: 'PITCHER · 6학년' },
+        { slotId: 'p2', number: '7', name: '이서준', position: 'CATCHER · 5학년' },
+        { slotId: 'p3', number: '23', name: '박도윤', position: 'INFIELD · 5학년' },
+        { slotId: 'p4', number: '31', name: '최하준', position: 'OUTFIELD · 4학년' },
+        { slotId: 'c1', number: 'HC', name: '정우성', position: 'HEAD COACH' },
+        { slotId: 'c2', number: 'AC', name: '한지호', position: 'ASSISTANT COACH' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>
