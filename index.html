@@ -30,6 +30,13 @@
      breaks the club types in instead of collapsing them into one line. */
   #hero-subtitle, #about-text, .card-body { white-space: pre-line; }
 
+  /* About-tiles: mobile stays a compact landscape card; desktop grows
+     taller so the tiles don't look small next to the hero above them. */
+  .about-tile { aspect-ratio: 4/3; }
+  @media (min-width: 900px) {
+    .about-tile { aspect-ratio: 3/4; }
+  }
+
   /* Header mega-menu: hovering the nav bar reveals one full-width panel
      with every category's sub-links shown side by side, mirroring the
      reference site rather than a per-item dropdown. */

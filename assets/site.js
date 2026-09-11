@@ -94,7 +94,7 @@
         { photo: about.photo3, title: '육성반안내', href: 'development.html' }
       ];
       aboutTiles.innerHTML = tiles.map(function (t) {
-        return '<a href="' + t.href + '" style="position:relative; display:block; aspect-ratio:4/3; overflow:hidden; text-decoration:none">' +
+        return '<a href="' + t.href + '" class="about-tile" style="position:relative; display:block; overflow:hidden; text-decoration:none">' +
           photoOrPlaceholder(t.photo, t.title + ' 사진') +
           '<div style="position:absolute; left:0; bottom:0; display:flex; align-items:center; gap:14px; background:#16233f; padding:14px 18px; max-width:88%">' +
           '<div>' +
