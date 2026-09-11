@@ -25,6 +25,10 @@
     color:rgba(0,0,0,.45); font-size:12px; line-height:1.4;
   }
   section#top .ph, section#roster .ph { color:rgba(255,255,255,.55); }
+
+  /* CMS text fields are plain multiline textareas — respect the line
+     breaks the club types in instead of collapsing them into one line. */
+  #hero-subtitle, #about-text, .card-body { white-space: pre-line; }
 </style>
 </head>
 <body>
