@@ -37,6 +37,11 @@
     .about-tile { aspect-ratio: 2/3; }
   }
 
+  /* Cross-fade to a second photo on hover, when one is set. */
+  .about-tile-img { position: absolute; inset: 0; }
+  .about-tile-img-hover { opacity: 0; transition: opacity .35s ease; }
+  .about-tile:hover .about-tile-img-hover { opacity: 1; }
+
   /* Header mega-menu: hovering the nav bar reveals one full-width panel
      with every category's sub-links shown side by side, mirroring the
      reference site rather than a per-item dropdown. */

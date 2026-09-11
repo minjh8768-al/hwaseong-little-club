@@ -89,13 +89,14 @@
     var aboutTiles = document.getElementById('about-tiles');
     if (aboutTiles) {
       var tiles = [
-        { photo: about.photo, title: '구단소개', href: 'about.html' },
-        { photo: about.photo2, title: '선수반안내', href: 'players.html' },
-        { photo: about.photo3, title: '육성반안내', href: 'development.html' }
+        { photo: about.photo, hover: about.photo_hover, title: '구단소개', href: 'about.html' },
+        { photo: about.photo2, hover: about.photo2_hover, title: '선수반안내', href: 'players.html' },
+        { photo: about.photo3, hover: about.photo3_hover, title: '육성반안내', href: 'development.html' }
       ];
       aboutTiles.innerHTML = tiles.map(function (t) {
         return '<a href="' + t.href + '" class="about-tile" style="position:relative; display:block; overflow:hidden; text-decoration:none">' +
-          photoOrPlaceholder(t.photo, t.title + ' 사진') +
+          '<div class="about-tile-img about-tile-img-base">' + photoOrPlaceholder(t.photo, t.title + ' 사진') + '</div>' +
+          (t.hover ? '<div class="about-tile-img about-tile-img-hover">' + photoOrPlaceholder(t.hover, t.title + ' 사진 2') + '</div>' : '') +
           '<div style="position:absolute; left:0; bottom:0; display:flex; align-items:center; gap:14px; background:#16233f; padding:14px 18px; max-width:88%">' +
           '<div>' +
           '<div style="font-size:11px; color:#9fb3cf; letter-spacing:.06em; margin-bottom:2px">화성시 서부리틀야구단</div>' +
