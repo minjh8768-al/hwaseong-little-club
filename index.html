@@ -49,6 +49,39 @@
     color: #16233f; font-family: "Noto Sans KR", sans-serif;
   }
   .mega-col a:hover { color: #d1491f; }
+
+  /* Mobile nav: below the breakpoint the desktop grid gets cramped, so
+     swap it for a logo + hamburger bar and a tap-to-expand menu. */
+  .mobile-bar, #mobile-menu { display: none; }
+  @media (max-width: 960px) {
+    .nav-row { display: none; }
+    .mobile-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 20px; border-bottom: 3px solid #d1491f;
+    }
+    .mobile-bar a { display: flex; align-items: center; gap: 8px; color: #16233f; }
+    .mobile-bar span {
+      font-family: "Barlow Condensed", sans-serif; font-size: 16px; letter-spacing: .04em;
+    }
+    #mobile-menu-btn {
+      appearance: none; border: 0; background: transparent; padding: 8px; cursor: pointer;
+      display: flex; flex-direction: column; gap: 5px; margin: 0;
+    }
+    #mobile-menu-btn span { width: 24px; height: 2px; background: #16233f; display: block; }
+    #mobile-menu {
+      flex-direction: column; background: #fff; border-bottom: 1px solid var(--color-divider);
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu > a, #mobile-menu summary {
+      display: block; padding: 14px 20px; font-size: 16px; font-weight: 700;
+      color: #16233f; border-top: 1px solid var(--color-divider); cursor: pointer; list-style: none;
+    }
+    #mobile-menu summary::-webkit-details-marker { display: none; }
+    #mobile-menu details[open] summary { color: #d1491f; }
+    #mobile-menu details a {
+      display: block; padding: 10px 20px 10px 36px; font-size: 14px; font-weight: 500; color: #16233f;
+    }
+  }
 </style>
 </head>
 <body>
@@ -99,6 +132,37 @@
         </div>
       </div>
     </div>
+
+    <div class="mobile-bar">
+      <a href="#top">
+        <img src="assets/logo-v2.png" alt="화성시 서부리틀야구단" style="width:36px; height:36px; object-fit:contain">
+        <span>HWASEONG LITTLE CLUB</span>
+      </a>
+      <button id="mobile-menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav id="mobile-menu">
+      <a href="#about">구단소개</a>
+      <details>
+        <summary>선수단</summary>
+        <a href="#roster">선수단 소개</a>
+        <a href="#roster">졸업생 진로현황</a>
+        <a href="#roster">선수일지</a>
+      </details>
+      <details>
+        <summary>경기일정</summary>
+        <a href="#schedule">대회일정</a>
+        <a href="#schedule">연도별 기록</a>
+      </details>
+      <a href="#news">공지·소식</a>
+      <details>
+        <summary>갤러리</summary>
+        <a href="#gallery">연도별 대회사진·동영상</a>
+        <a href="#gallery">행사 사진·동영상</a>
+      </details>
+      <a href="#join">입단안내</a>
+    </nav>
   </header>
 
   <section id="top" style="background:#16233f; color:#f2f2f3; position:relative; overflow:hidden">
@@ -268,6 +332,23 @@
 })();
 </script>
 <script src="assets/site.js" defer></script>
+<script>
+(function () {
+  var btn = document.getElementById('mobile-menu-btn');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
