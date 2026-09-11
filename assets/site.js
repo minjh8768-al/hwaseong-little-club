@@ -105,6 +105,7 @@
     if (snsGrid) {
       var snsItems = [
         { label: '네이버 클립', url: sns.naver_clip },
+        { label: '네이버 밴드', url: sns.naver_band },
         { label: '인스타그램', url: sns.instagram },
         { label: '블로그', url: sns.blog }
       ];
