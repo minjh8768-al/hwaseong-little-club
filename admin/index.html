@@ -46,10 +46,21 @@
           }
         });
       }
+      function coverDecapLogo() {
+        if (document.getElementById('cover-decap')) return;
+        var bg = getComputedStyle(document.body).backgroundColor;
+        var div = document.createElement('div');
+        div.id = 'cover-decap';
+        div.style.cssText =
+          'position:fixed; left:0; right:0; bottom:0; height:70px; ' +
+          'background:' + bg + '; z-index:9999;';
+        document.body.appendChild(div);
+      }
       function tidyLoginScreen() {
         hideDecapBranding();
         hideDecapFooterLogo();
         renameLoginButton();
+        coverDecapLogo();
       }
       new MutationObserver(tidyLoginScreen).observe(document.documentElement, { childList: true, subtree: true });
       tidyLoginScreen();
