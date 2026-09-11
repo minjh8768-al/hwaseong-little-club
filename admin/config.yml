@@ -2,12 +2,11 @@ backend:
   name: github
   repo: minjh8768-al/hwaseong-little-club
   branch: main
-  # Auth goes through a GitHub OAuth App registered on the Netlify
-  # site's Access control > OAuth panel (that panel works even though
-  # this site's own deploys are paused — it's not a deploy). This lets
-  # the admin be hosted anywhere (GitHub Pages included) and login with
-  # a GitHub account instead of a Netlify Identity email/password.
-  base_url: https://sage-liger-8a57dd.netlify.app
+  # Auth goes through Netlify's shared, always-on OAuth relay (not tied
+  # to any single site's deploy state), using the GitHub OAuth App
+  # credentials registered on the sage-liger-8a57dd site's OAuth panel.
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 media_folder: "assets/uploads"
 public_folder: "assets/uploads"
