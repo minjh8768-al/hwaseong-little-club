@@ -22,15 +22,29 @@
       }
       function renameLoginButton() {
         document.querySelectorAll('button').forEach(function (btn) {
+          var isLoginBtn = false;
           Array.from(btn.childNodes).forEach(function (node) {
-            if (node.nodeType === 3 && /GitHub\s*로\s*로그인/.test(node.textContent)) {
+            if (node.nodeType === 3 && /GitHub\s*로\s*로그인|^\s*로그인\s*$/.test(node.textContent)) {
               node.textContent = '로그인';
+              isLoginBtn = true;
             }
           });
+          if (isLoginBtn) {
+            btn.querySelectorAll('svg').forEach(function (svg) { svg.style.display = 'none'; });
+          }
+        });
+      }
+      function hideDecapFooterLogo() {
+        document.querySelectorAll('*').forEach(function (el) {
+          if (el.children.length === 0 && el.textContent.trim() === 'Decap') {
+            var wrap = el.closest('a') || el.parentElement;
+            if (wrap) wrap.style.display = 'none';
+          }
         });
       }
       function tidyLoginScreen() {
         hideDecapBranding();
+        hideDecapFooterLogo();
         renameLoginButton();
       }
       new MutationObserver(tidyLoginScreen).observe(document.documentElement, { childList: true, subtree: true });
