@@ -33,10 +33,15 @@
             }
           });
           if (isLoginBtn) {
-            btn.querySelectorAll('svg').forEach(function (svg) { svg.style.display = 'none'; });
+            // Drop every element child (icon spans/svgs) so no leftover
+            // reserved space can push the text off-center.
+            Array.from(btn.children).forEach(function (child) { child.remove(); });
+            btn.style.display = 'flex';
+            btn.style.alignItems = 'center';
+            btn.style.justifyContent = 'center';
+            btn.style.textAlign = 'center';
             btn.style.marginLeft = 'auto';
             btn.style.marginRight = 'auto';
-            btn.style.justifyContent = 'center';
             if (btn.parentElement) btn.parentElement.style.textAlign = 'center';
           }
         });
