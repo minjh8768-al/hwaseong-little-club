@@ -29,6 +29,20 @@
   /* CMS text fields are plain multiline textareas — respect the line
      breaks the club types in instead of collapsing them into one line. */
   #hero-subtitle, #about-text, .card-body { white-space: pre-line; }
+
+  /* Header nav hover dropdowns */
+  .nav-item { position: relative; }
+  .nav-dropdown {
+    display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    background: #fff; border: 1px solid var(--color-divider); box-shadow: 0 10px 24px rgba(22,35,63,.14);
+    padding: 8px 0; min-width: 190px; z-index: 50; text-align: center;
+  }
+  .nav-item:hover .nav-dropdown { display: block; }
+  .nav-dropdown a {
+    display: block; padding: 9px 20px; font-size: 14px; font-weight: 500;
+    white-space: nowrap; color: #16233f; font-family: "Noto Sans KR", sans-serif;
+  }
+  .nav-dropdown a:hover { background: var(--color-neutral-100); color: #d1491f; }
 </style>
 </head>
 <body>
@@ -47,11 +61,30 @@
     </div>
     <div style="max-width:1650px; margin:0 auto; padding:14px 48px; display:flex; align-items:center; justify-content:center; gap:115px; flex-wrap:wrap; border-bottom:3px solid #d1491f; position:relative">
       <a href="#about" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">구단소개</a>
-      <a href="#roster" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">선수단</a>
-      <a href="#schedule" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">경기일정</a>
+      <div class="nav-item">
+        <a href="#roster" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">선수단</a>
+        <div class="nav-dropdown">
+          <a href="#roster">선수단 소개</a>
+          <a href="#roster">졸업생 진로현황</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#schedule" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">경기일정</a>
+        <div class="nav-dropdown">
+          <a href="#schedule">대회일정</a>
+          <a href="#schedule">일지</a>
+          <a href="#schedule">연도별 기록</a>
+        </div>
+      </div>
       <div aria-hidden="true" style="flex:0 0 108px; height:1px"></div>
       <a href="#news" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">공지·소식</a>
-      <a href="#gallery" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">갤러리</a>
+      <div class="nav-item">
+        <a href="#gallery" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">갤러리</a>
+        <div class="nav-dropdown">
+          <a href="#gallery">연도별 대회사진·동영상</a>
+          <a href="#gallery">행사 사진·동영상</a>
+        </div>
+      </div>
       <a href="#join" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">입단안내</a>
       <a href="#top" style="position:absolute; left:50%; top:-14px; transform:translateX(-50%); z-index:5; line-height:0">
         <img src="assets/logo-v2.png" alt="화성시 서부리틀야구단" style="width:140px; height:140px; object-fit:contain; filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))">
