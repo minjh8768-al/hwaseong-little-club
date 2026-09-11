@@ -48,7 +48,9 @@ collections:
             collapsed: true
             fields:
               - { label: "소개 문구", name: "text", widget: "text" }
-              - { label: "단체 사진", name: "photo", widget: "image", required: false }
+              - { label: "사진 1 - 구단소개", name: "photo", widget: "image", required: false }
+              - { label: "사진 2 - 선수반안내", name: "photo2", widget: "image", required: false }
+              - { label: "사진 3 - 육성반안내", name: "photo3", widget: "image", required: false }
 
           - label: "선수단 · 코칭스태프"
             name: "roster"

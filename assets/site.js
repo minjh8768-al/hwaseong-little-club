@@ -82,8 +82,25 @@
     // About
     var about = data.about || {};
     setText('about-text', about.text);
-    var aboutPhoto = document.getElementById('about-photo');
-    if (aboutPhoto) aboutPhoto.innerHTML = photoOrPlaceholder(about.photo, '팀 단체사진');
+    var aboutTiles = document.getElementById('about-tiles');
+    if (aboutTiles) {
+      var tiles = [
+        { photo: about.photo, title: '구단소개', href: '#about' },
+        { photo: about.photo2, title: '선수반안내', href: '#about' },
+        { photo: about.photo3, title: '육성반안내', href: '#about' }
+      ];
+      aboutTiles.innerHTML = tiles.map(function (t) {
+        return '<a href="' + t.href + '" style="position:relative; display:block; aspect-ratio:4/3; overflow:hidden; text-decoration:none">' +
+          photoOrPlaceholder(t.photo, t.title + ' 사진') +
+          '<div style="position:absolute; left:0; bottom:0; display:flex; align-items:center; gap:14px; background:#16233f; padding:14px 18px; max-width:88%">' +
+          '<div>' +
+          '<div style="font-size:11px; color:#9fb3cf; letter-spacing:.06em; margin-bottom:2px">화성시 서부리틀야구단</div>' +
+          '<div style="font-size:20px; font-weight:800; color:#fff">' + esc(t.title) + '</div>' +
+          '</div>' +
+          '<span style="flex:none; width:34px; height:34px; border:2px solid #fff; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px">→</span>' +
+          '</div></a>';
+      }).join('');
+    }
 
     // Roster
     var rosterGrid = document.getElementById('roster-grid');
