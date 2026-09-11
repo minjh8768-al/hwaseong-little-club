@@ -7,6 +7,9 @@
   <style>
     /* Hide Decap's own footer branding link on the login screen. */
     a[href*="decap" i] { display: none !important; }
+    /* The "Decap" wordmark is baked into this SVG's vector paths (no
+       real text to match), but the wrapper's class name is stable. */
+    span[class*="NetlifyCreditIcon"] { display: none !important; }
   </style>
 </head>
 <body>
@@ -38,29 +41,9 @@
           }
         });
       }
-      function hideDecapFooterLogo() {
-        document.querySelectorAll('*').forEach(function (el) {
-          if (el.children.length === 0 && el.textContent.trim() === 'Decap') {
-            var wrap = el.closest('a') || el.parentElement;
-            if (wrap) wrap.style.display = 'none';
-          }
-        });
-      }
-      function coverDecapLogo() {
-        if (document.getElementById('cover-decap')) return;
-        var bg = getComputedStyle(document.body).backgroundColor;
-        var div = document.createElement('div');
-        div.id = 'cover-decap';
-        div.style.cssText =
-          'position:fixed; left:0; right:0; bottom:0; height:70px; ' +
-          'background:' + bg + '; z-index:9999;';
-        document.body.appendChild(div);
-      }
       function tidyLoginScreen() {
         hideDecapBranding();
-        hideDecapFooterLogo();
         renameLoginButton();
-        coverDecapLogo();
       }
       new MutationObserver(tidyLoginScreen).observe(document.documentElement, { childList: true, subtree: true });
       tidyLoginScreen();
