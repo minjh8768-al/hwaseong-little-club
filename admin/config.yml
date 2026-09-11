@@ -2,11 +2,11 @@ backend:
   name: github
   repo: minjh8768-al/hwaseong-little-club
   branch: main
-  # Auth goes through Netlify's shared, always-on OAuth relay (not tied
-  # to any single site's deploy state), using the GitHub OAuth App
-  # credentials registered on the sage-liger-8a57dd site's OAuth panel.
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  # Our own tiny OAuth relay (GitHub repo: cms-oauth-proxy), deployed on
+  # Vercel — fully independent of Netlify. Handles the GitHub OAuth
+  # code-for-token exchange server-side (required since GitHub Pages
+  # can't run server code / can't keep a client secret).
+  base_url: https://cms-oauth-proxy-puce.vercel.app
 
 media_folder: "assets/uploads"
 public_folder: "assets/uploads"
