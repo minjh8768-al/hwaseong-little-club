@@ -11,9 +11,19 @@
     });
   }
 
+  // The CMS sometimes writes root-absolute upload paths (e.g.
+  // "/assets/uploads/x.jpg"), which 404 when this site is served under
+  // a subpath (GitHub Pages project sites). Stripping the leading slash
+  // makes it resolve relative to this page instead, which works whether
+  // the site sits at a domain root or under a subpath.
+  function assetUrl(path) {
+    if (!path) return path;
+    return path.replace(/^\/+/, '');
+  }
+
   function photoOrPlaceholder(path, placeholderText, imgStyle) {
     if (path) {
-      return '<img src="' + esc(path) + '" alt="" style="width:100%; height:100%; object-fit:cover;' + (imgStyle || '') + '">';
+      return '<img src="' + esc(assetUrl(path)) + '" alt="" style="width:100%; height:100%; object-fit:cover;' + (imgStyle || '') + '">';
     }
     return '<div class="ph" style="height:100%">' + esc(placeholderText) + '</div>';
   }
@@ -29,7 +39,7 @@
     var heroBg = document.getElementById('hero-bg');
     if (heroBg) {
       if (hero.video) {
-        heroBg.innerHTML = '<video src="' + esc(hero.video) + '" autoplay muted loop playsinline ' +
+        heroBg.innerHTML = '<video src="' + esc(assetUrl(hero.video)) + '" autoplay muted loop playsinline ' +
           'style="width:100%; height:100%; object-fit:cover"></video>';
       } else {
         heroBg.innerHTML = photoOrPlaceholder(hero.image, '히어로 사진을 넣어주세요 (경기/훈련 사진)');
