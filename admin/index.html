@@ -20,8 +20,21 @@
           }
         });
       }
-      new MutationObserver(hideDecapBranding).observe(document.documentElement, { childList: true, subtree: true });
-      hideDecapBranding();
+      function renameLoginButton() {
+        document.querySelectorAll('button').forEach(function (btn) {
+          Array.from(btn.childNodes).forEach(function (node) {
+            if (node.nodeType === 3 && /GitHub\s*로\s*로그인/.test(node.textContent)) {
+              node.textContent = '로그인';
+            }
+          });
+        });
+      }
+      function tidyLoginScreen() {
+        hideDecapBranding();
+        renameLoginButton();
+      }
+      new MutationObserver(tidyLoginScreen).observe(document.documentElement, { childList: true, subtree: true });
+      tidyLoginScreen();
     })();
   </script>
 </body>
