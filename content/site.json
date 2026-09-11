@@ -90,9 +90,7 @@
   ],
   "about": {
     "text": "화성시 서부리틀야구단은 2020년 창단한 유소년 야구단입니다. 승부보다 기본기와 태도를 먼저 가르치고, 모든 단원이 경기에 나설 기회를 갖도록 운영합니다.",
-    "photo": "/assets/uploads/단체사진2.jpg",
-    "photo2": "",
-    "photo3": ""
+    "photo": "/assets/uploads/단체사진2.jpg"
   },
   "roster": [
     {
@@ -105,31 +103,31 @@
       "number": "7",
       "name": "이서준",
       "position": "CATCHER · 5학년",
-      "photo": ""
+      "photo": "/assets/uploads/kakaotalk_20260911_113351810.png"
     },
     {
       "number": "23",
       "name": "박도윤",
       "position": "INFIELD · 5학년",
-      "photo": ""
+      "photo": "/assets/uploads/kakaotalk_20260911_113351810.png"
     },
     {
       "number": "31",
       "name": "최하준",
       "position": "OUTFIELD · 4학년",
-      "photo": ""
+      "photo": "/assets/uploads/kakaotalk_20260911_113351810.png"
     },
     {
       "number": "HC",
       "name": "정우성",
       "position": "HEAD COACH",
-      "photo": ""
+      "photo": "/assets/uploads/kakaotalk_20260911_113351810.png"
     },
     {
       "number": "AC",
       "name": "한지호",
       "position": "ASSISTANT COACH",
-      "photo": ""
+      "photo": "/assets/uploads/kakaotalk_20260911_113351810.png"
     }
   ],
   "gallery": [
