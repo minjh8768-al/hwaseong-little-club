@@ -25,7 +25,8 @@ collections:
               - { label: "큰 제목 1번째 줄", name: "title_line1", widget: "string" }
               - { label: "큰 제목 2번째 줄", name: "title_line2", widget: "string" }
               - { label: "소개 문구", name: "subtitle", widget: "text" }
-              - { label: "배경 사진", name: "image", widget: "image", required: false }
+              - { label: "배경 사진", name: "image", widget: "image", required: false, hint: "아래 배경 영상을 넣으면 이 사진 대신 영상이 재생됩니다." }
+              - { label: "배경 영상 (선택, 사진보다 우선 재생됨)", name: "video", widget: "file", required: false, hint: "mp4 파일 권장. 너무 큰 파일(50MB 이상)은 업로드/로딩이 느려질 수 있어요." }
               - label: "통계 (창단/등록선수 등)"
                 name: "stats"
                 widget: "list"

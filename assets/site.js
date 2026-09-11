@@ -27,7 +27,14 @@
     setText('hero-title-2', hero.title_line2);
     setText('hero-subtitle', hero.subtitle);
     var heroBg = document.getElementById('hero-bg');
-    if (heroBg) heroBg.innerHTML = photoOrPlaceholder(hero.image, '히어로 사진을 넣어주세요 (경기/훈련 사진)');
+    if (heroBg) {
+      if (hero.video) {
+        heroBg.innerHTML = '<video src="' + esc(hero.video) + '" autoplay muted loop playsinline ' +
+          'style="width:100%; height:100%; object-fit:cover"></video>';
+      } else {
+        heroBg.innerHTML = photoOrPlaceholder(hero.image, '히어로 사진을 넣어주세요 (경기/훈련 사진)');
+      }
+    }
     var statsWrap = document.getElementById('hero-stats');
     if (statsWrap && Array.isArray(hero.stats)) {
       statsWrap.innerHTML = hero.stats.map(function (s) {
