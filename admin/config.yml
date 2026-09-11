@@ -11,6 +11,10 @@ public_folder: "assets/uploads"
 
 locale: "ko"
 
+logo_url: "https://minjh8768-al.github.io/hwaseong-little-club/assets/logo-v2.png"
+site_url: "https://minjh8768-al.github.io/hwaseong-little-club/"
+display_url: "https://minjh8768-al.github.io/hwaseong-little-club/"
+
 collections:
   - name: "site"
     label: "웹사이트 내용"
