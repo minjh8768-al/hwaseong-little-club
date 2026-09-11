@@ -6,10 +6,23 @@
   <title>화성서부리틀야구단 관리자</title>
   <style>
     /* Hide Decap's own footer branding link on the login screen. */
-    a[href*="decapcms.org"] { display: none !important; }
+    a[href*="decap" i] { display: none !important; }
   </style>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    (function () {
+      function hideDecapBranding() {
+        document.querySelectorAll('a').forEach(function (a) {
+          if (/decap/i.test(a.textContent || '') || /decap/i.test(a.href || '')) {
+            a.style.display = 'none';
+          }
+        });
+      }
+      new MutationObserver(hideDecapBranding).observe(document.documentElement, { childList: true, subtree: true });
+      hideDecapBranding();
+    })();
+  </script>
 </body>
 </html>
