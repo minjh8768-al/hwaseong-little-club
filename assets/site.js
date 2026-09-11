@@ -82,12 +82,14 @@
     // About
     var about = data.about || {};
     setText('about-text', about.text);
+    var aboutPhoto = document.getElementById('about-photo');
+    if (aboutPhoto) aboutPhoto.innerHTML = photoOrPlaceholder(about.photo, '팀 단체사진');
     var aboutTiles = document.getElementById('about-tiles');
     if (aboutTiles) {
       var tiles = [
-        { photo: about.photo, title: '구단소개', href: '#about' },
-        { photo: about.photo2, title: '선수반안내', href: '#about' },
-        { photo: about.photo3, title: '육성반안내', href: '#about' }
+        { photo: about.photo, title: '구단소개', href: 'about.html' },
+        { photo: about.photo2, title: '선수반안내', href: 'players.html' },
+        { photo: about.photo3, title: '육성반안내', href: 'development.html' }
       ];
       aboutTiles.innerHTML = tiles.map(function (t) {
         return '<a href="' + t.href + '" style="position:relative; display:block; aspect-ratio:4/3; overflow:hidden; text-decoration:none">' +
