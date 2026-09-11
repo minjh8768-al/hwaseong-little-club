@@ -31,6 +31,10 @@
           });
           if (isLoginBtn) {
             btn.querySelectorAll('svg').forEach(function (svg) { svg.style.display = 'none'; });
+            btn.style.marginLeft = 'auto';
+            btn.style.marginRight = 'auto';
+            btn.style.justifyContent = 'center';
+            if (btn.parentElement) btn.parentElement.style.textAlign = 'center';
           }
         });
       }
