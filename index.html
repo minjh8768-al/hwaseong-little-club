@@ -36,11 +36,13 @@
   .mega-panel {
     display: none; position: absolute; top: 100%; left: 0; right: 0;
     background: #fff; border-top: 1px solid var(--color-divider);
-    box-shadow: 0 16px 30px rgba(22,35,63,.14);
-    grid-template-columns: repeat(3, 1fr) 108px repeat(3, 1fr);
-    gap: 8px; padding: 28px 48px; z-index: 45;
+    box-shadow: 0 16px 30px rgba(22,35,63,.14); z-index: 45;
   }
-  .nav-row:hover .mega-panel { display: grid; }
+  .nav-row:hover .mega-panel { display: block; }
+  .mega-panel-inner {
+    max-width: 1650px; margin: 0 auto; padding: 28px 48px;
+    display: grid; grid-template-columns: repeat(3, 1fr) 108px repeat(3, 1fr);
+  }
   .mega-col { text-align: center; }
   .mega-col a {
     display: block; padding: 8px 4px; font-size: 14px; font-weight: 500;
@@ -63,36 +65,38 @@
         <a href="#join" style="color:#d1491f; font-weight:700">입단 문의</a>
       </div>
     </div>
-    <div class="nav-row" style="max-width:1650px; margin:0 auto; padding:14px 48px; display:flex; align-items:center; justify-content:center; gap:115px; flex-wrap:wrap; border-bottom:3px solid #d1491f; position:relative">
-      <a href="#about" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">구단소개</a>
-      <a href="#roster" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">선수단</a>
-      <a href="#schedule" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">경기일정</a>
-      <div aria-hidden="true" style="flex:0 0 108px; height:1px"></div>
-      <a href="#news" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">공지·소식</a>
-      <a href="#gallery" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">갤러리</a>
-      <a href="#join" style="color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">입단안내</a>
+    <div class="nav-row" style="max-width:1650px; margin:0 auto; padding:14px 48px; display:grid; grid-template-columns:repeat(3,1fr) 108px repeat(3,1fr); align-items:center; border-bottom:3px solid #d1491f; position:relative">
+      <a href="#about" style="text-align:center; color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">구단소개</a>
+      <a href="#roster" style="text-align:center; color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">선수단</a>
+      <a href="#schedule" style="text-align:center; color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">경기일정</a>
+      <div aria-hidden="true"></div>
+      <a href="#news" style="text-align:center; color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">공지·소식</a>
+      <a href="#gallery" style="text-align:center; color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">갤러리</a>
+      <a href="#join" style="text-align:center; color:#16233f; font-family:'Barlow Condensed','Noto Sans KR',sans-serif; font-size:18px; letter-spacing:.04em; padding:10px 0; font-weight:700">입단안내</a>
       <a href="#top" style="position:absolute; left:50%; top:-14px; transform:translateX(-50%); z-index:5; line-height:0">
         <img src="assets/logo-v2.png" alt="화성시 서부리틀야구단" style="width:140px; height:140px; object-fit:contain; filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))">
       </a>
 
       <div class="mega-panel">
-        <div class="mega-col"><a href="#about">구단소개</a></div>
-        <div class="mega-col">
-          <a href="#roster">선수단 소개</a>
-          <a href="#roster">졸업생 진로현황</a>
+        <div class="mega-panel-inner">
+          <div class="mega-col"><a href="#about">구단소개</a></div>
+          <div class="mega-col">
+            <a href="#roster">선수단 소개</a>
+            <a href="#roster">졸업생 진로현황</a>
+            <a href="#roster">선수일지</a>
+          </div>
+          <div class="mega-col">
+            <a href="#schedule">대회일정</a>
+            <a href="#schedule">연도별 기록</a>
+          </div>
+          <div></div>
+          <div class="mega-col"><a href="#news">공지·소식</a></div>
+          <div class="mega-col">
+            <a href="#gallery">연도별 대회사진·동영상</a>
+            <a href="#gallery">행사 사진·동영상</a>
+          </div>
+          <div class="mega-col"><a href="#join">입단안내</a></div>
         </div>
-        <div class="mega-col">
-          <a href="#schedule">대회일정</a>
-          <a href="#schedule">일지</a>
-          <a href="#schedule">연도별 기록</a>
-        </div>
-        <div></div>
-        <div class="mega-col"><a href="#news">공지·소식</a></div>
-        <div class="mega-col">
-          <a href="#gallery">연도별 대회사진·동영상</a>
-          <a href="#gallery">행사 사진·동영상</a>
-        </div>
-        <div class="mega-col"><a href="#join">입단안내</a></div>
       </div>
     </div>
   </header>
