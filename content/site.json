@@ -144,6 +144,11 @@
       "photo": ""
     }
   ],
+  "sns": {
+    "naver_clip": "",
+    "instagram": "",
+    "blog": ""
+  },
   "join": {
     "training_location": "화성시 서부 야구장",
     "training_time": "토·일 09:00 – 13:00, 수 17:00 – 19:00",

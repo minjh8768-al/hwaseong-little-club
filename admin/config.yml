@@ -83,6 +83,15 @@ collections:
             fields:
               - { label: "사진", name: "photo", widget: "image", required: false }
 
+          - label: "SNS · 미디어"
+            name: "sns"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "네이버 클립 링크", name: "naver_clip", widget: "string", required: false }
+              - { label: "인스타그램 링크", name: "instagram", widget: "string", required: false }
+              - { label: "블로그 링크", name: "blog", widget: "string", required: false }
+
           - label: "입단 안내 · 연락처"
             name: "join"
             widget: "object"
