@@ -69,25 +69,36 @@
     }
     #mobile-menu-btn span { width: 24px; height: 2px; background: #16233f; display: block; }
     #mobile-menu {
-      flex-direction: column; background: #fff; border-bottom: 1px solid var(--color-divider);
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; background: #fff;
+      box-shadow: 0 20px 40px rgba(15,25,50,.25); z-index: 44;
+      max-height: 80vh; overflow-y: auto;
     }
     #mobile-menu.open { display: flex; }
     #mobile-menu > a, #mobile-menu summary {
-      display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+      display: flex; align-items: center; gap: 14px; padding: 14px 20px;
       font-size: 16px; font-weight: 700;
       color: #16233f; border-top: 1px solid var(--color-divider); cursor: pointer; list-style: none;
     }
     #mobile-menu summary::-webkit-details-marker { display: none; }
-    #mobile-menu .mm-icon { flex: none; width: 24px; font-size: 18px; text-align: center; }
+    #mobile-menu .mm-icon {
+      flex: none; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+      font-size: 16px; border-radius: 8px; background: rgba(209,73,31,.08);
+    }
     #mobile-menu .mm-label { flex: 1; }
     #mobile-menu .mm-arrow {
-      flex: none; color: #d1491f; font-size: 20px; font-weight: 700; transition: transform .15s;
+      flex: none; font-size: 18px; font-weight: 700; transition: transform .15s;
     }
     #mobile-menu details[open] summary { color: #d1491f; }
-    #mobile-menu details[open] summary .mm-arrow { transform: rotate(180deg); }
+    #mobile-menu details[open] summary .mm-icon { background: rgba(209,73,31,.16); }
+    #mobile-menu details[open] summary .mm-arrow { color: #d1491f; transform: rotate(180deg); }
     #mobile-menu details a {
-      display: block; padding: 10px 20px 10px 56px; font-size: 14px; font-weight: 500; color: #16233f;
+      display: block; padding: 10px 20px 10px 68px; font-size: 14px; font-weight: 500; color: #16233f;
     }
+    #mobile-menu-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(15,25,50,.45); z-index: 39;
+    }
+    #mobile-menu-backdrop.open { display: block; }
   }
 </style>
 </head>
@@ -147,8 +158,9 @@
       </a>
       <span style="width:40px"></span>
     </div>
+    <div id="mobile-menu-backdrop"></div>
     <nav id="mobile-menu">
-      <a href="#about"><span class="mm-icon">🏟️</span><span class="mm-label">구단소개</span><span class="mm-arrow">›</span></a>
+      <a href="#about"><span class="mm-icon">🏟️</span><span class="mm-label">구단소개</span><span class="mm-arrow" style="color:var(--color-neutral-500)">⌄</span></a>
       <details>
         <summary><span class="mm-icon">⚾</span><span class="mm-label">선수단</span><span class="mm-arrow">⌄</span></summary>
         <a href="#roster">선수단 소개</a>
@@ -160,13 +172,13 @@
         <a href="#schedule">대회일정</a>
         <a href="#schedule">연도별 기록</a>
       </details>
-      <a href="#news"><span class="mm-icon">📢</span><span class="mm-label">공지·소식</span><span class="mm-arrow">›</span></a>
+      <a href="#news"><span class="mm-icon">📢</span><span class="mm-label">공지·소식</span><span class="mm-arrow" style="color:var(--color-neutral-500)">⌄</span></a>
       <details>
         <summary><span class="mm-icon">📷</span><span class="mm-label">갤러리</span><span class="mm-arrow">⌄</span></summary>
         <a href="#gallery">연도별 대회사진·동영상</a>
         <a href="#gallery">행사 사진·동영상</a>
       </details>
-      <a href="#join"><span class="mm-icon">📝</span><span class="mm-label">입단안내</span><span class="mm-arrow">›</span></a>
+      <a href="#join"><span class="mm-icon">📝</span><span class="mm-label">입단안내</span><span class="mm-arrow" style="color:var(--color-neutral-500)">⌄</span></a>
     </nav>
   </header>
 
@@ -341,16 +353,19 @@
 (function () {
   var btn = document.getElementById('mobile-menu-btn');
   var menu = document.getElementById('mobile-menu');
+  var backdrop = document.getElementById('mobile-menu-backdrop');
   if (!btn || !menu) return;
-  btn.addEventListener('click', function () {
-    var open = menu.classList.toggle('open');
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    if (backdrop) backdrop.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function () {
+    setOpen(!menu.classList.contains('open'));
   });
+  if (backdrop) backdrop.addEventListener('click', function () { setOpen(false); });
   menu.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () {
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    });
+    a.addEventListener('click', function () { setOpen(false); });
   });
 })();
 </script>
