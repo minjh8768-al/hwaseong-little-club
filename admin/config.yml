@@ -1,10 +1,10 @@
 backend:
   name: git-gateway
   branch: main
-  # Login/media API stays on the Netlify site (Identity + Git Gateway
-  # live there) even though the admin page itself may be served from
-  # GitHub Pages, whose deploys aren't tied to Netlify's paused quota.
-  base_url: https://sage-liger-8a57dd.netlify.app
+  # Login only works when this admin page is served FROM the Netlify
+  # site itself (cross-origin base_url broke login in testing) — so
+  # always use https://sage-liger-8a57dd.netlify.app/admin to edit,
+  # even though the public site itself now lives on GitHub Pages.
 
 media_folder: "assets/uploads"
 public_folder: "assets/uploads"
