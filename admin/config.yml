@@ -9,7 +9,10 @@ backend:
   base_url: https://cms-oauth-proxy-puce.vercel.app
 
 media_folder: "assets/uploads"
-public_folder: "assets/uploads"
+# Absolute (includes the GitHub Pages subpath) so the admin's own image
+# previews resolve correctly — the admin lives one level deeper
+# (/admin/) than the site root, so a plain relative path broke there.
+public_folder: "/hwaseong-little-club/assets/uploads"
 
 locale: "ko"
 

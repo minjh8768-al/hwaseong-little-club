@@ -11,13 +11,15 @@
     });
   }
 
-  // The CMS sometimes writes root-absolute upload paths (e.g.
-  // "/assets/uploads/x.jpg"), which 404 when this site is served under
-  // a subpath (GitHub Pages project sites). Stripping the leading slash
-  // makes it resolve relative to this page instead, which works whether
-  // the site sits at a domain root or under a subpath.
+  // New uploads come back as "/hwaseong-little-club/assets/uploads/x.jpg"
+  // (correct everywhere, incl. the admin's own preview one folder deeper
+  // at /admin/) — leave those alone. Older entries were saved as
+  // root-absolute without the repo prefix (e.g. "/assets/uploads/x.jpg"),
+  // which 404s under this GitHub Pages subpath; stripping the leading
+  // slash there makes them resolve relative to this page instead.
   function assetUrl(path) {
     if (!path) return path;
+    if (path.indexOf('/hwaseong-little-club/') === 0) return path;
     return path.replace(/^\/+/, '');
   }
 
