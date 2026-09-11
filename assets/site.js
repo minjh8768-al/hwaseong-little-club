@@ -79,14 +79,15 @@
     var rosterGrid = document.getElementById('roster-grid');
     if (rosterGrid && Array.isArray(data.roster)) {
       rosterGrid.innerHTML = data.roster.map(function (p) {
-        return '<div style="border:1px solid rgba(255,255,255,.25)">' +
+        return '<div style="overflow:hidden; border:1px solid rgba(255,255,255,.18)">' +
           '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(p.photo, '프로필 사진') + '</div>' +
-          '<div style="padding:14px; display:flex; align-items:baseline; gap:10px">' +
-          '<span style="font-family:\'Barlow Condensed\',sans-serif; font-size:30px; line-height:1; color:#d1491f">' + esc(p.number) + '</span>' +
-          '<span style="display:flex; flex-direction:column">' +
-          '<span style="font-size:17px; font-weight:700">' + esc(p.name) + '</span>' +
-          '<span style="font-size:12px; letter-spacing:.1em; color:#9fb3cf">' + esc(p.position) + '</span>' +
-          '</span></div></div>';
+          '<div style="background:#0f1932; padding:8px 10px">' +
+          '<div style="display:flex; align-items:baseline; justify-content:space-between; gap:6px">' +
+          '<span style="font-size:14px; font-weight:700; color:#fff">' + esc(p.name) + '</span>' +
+          '<span style="font-family:\'Barlow Condensed\',sans-serif; font-size:14px; font-weight:700; color:#d1491f; white-space:nowrap">NO.' + esc(p.number) + '</span>' +
+          '</div>' +
+          '<div style="font-size:10px; letter-spacing:.08em; color:#9fb3cf; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">' + esc(p.position) + '</div>' +
+          '</div></div>';
       }).join('');
     }
 
