@@ -50,7 +50,7 @@
       newsGrid.innerHTML = data.news.map(function (n) {
         return '<article class="card blueprint" style="padding:0; overflow:hidden">' +
           '<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>' +
-          '<div class="duotone" style="height:170px">' + photoOrPlaceholder(n.image, '소식 이미지') + '</div>' +
+          '<div style="height:170px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지') + '</div>' +
           '<div style="padding:18px">' +
           '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
           '<h3 class="card-title" style="font-size:22px">' + esc(n.title) + '</h3>' +
@@ -95,7 +95,7 @@
     var galleryGrid = document.getElementById('gallery-grid');
     if (galleryGrid && Array.isArray(data.gallery)) {
       galleryGrid.innerHTML = data.gallery.map(function (g) {
-        return '<div class="duotone" style="aspect-ratio:4/3; border:1px solid var(--color-divider)">' +
+        return '<div style="aspect-ratio:4/3; border:1px solid var(--color-divider); overflow:hidden">' +
           photoOrPlaceholder(g.photo, '사진') + '</div>';
       }).join('');
     }
