@@ -42,6 +42,43 @@
   .about-tile-img-hover { opacity: 0; transition: opacity .35s ease; }
   .about-tile:hover .about-tile-img-hover { opacity: 1; }
 
+  /* Join application form — its own clean card instead of the site's
+     flat wireframe ("blueprint") component style. */
+  .jf-card {
+    background: #fff; border-radius: 20px; padding: 36px;
+    box-shadow: 0 24px 60px rgba(22,35,63,.14), 0 2px 8px rgba(22,35,63,.06);
+    border: 1px solid var(--color-divider);
+  }
+  .jf-field { display: flex; flex-direction: column; gap: 7px; }
+  .jf-label { font-size: 12px; font-weight: 700; color: #16233f; letter-spacing: .02em; }
+  .jf-input {
+    width: 100%; box-sizing: border-box; padding: 13px 15px; font: inherit; font-size: 15px;
+    border: 1.5px solid #e4e7ee; border-radius: 10px; background: #f7f8fa; color: #16233f;
+    transition: border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+  }
+  .jf-input::placeholder { color: #a7adba; }
+  .jf-input:focus {
+    outline: none; border-color: #d1491f; background: #fff;
+    box-shadow: 0 0 0 3px rgba(209,73,31,.12);
+  }
+  textarea.jf-input { resize: vertical; min-height: 96px; }
+  .jf-submit {
+    width: 100%; height: 50px; border: 0; border-radius: 10px; cursor: pointer;
+    background: linear-gradient(135deg, #e2531f, #c53c14); color: #fff;
+    font-size: 16px; font-weight: 800; letter-spacing: .02em;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 10px 24px rgba(197,60,20,.3);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .jf-submit:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(197,60,20,.36); }
+  .jf-submit:active { transform: translateY(0); }
+  .jf-alert {
+    display: none; align-items: center; gap: 10px; padding: 13px 16px;
+    border-radius: 10px; font-size: 14px; font-weight: 600;
+  }
+  .jf-alert-success { background: #eaf6ee; color: #1f7a3f; }
+  .jf-alert-error { background: #fdecea; color: #b3261e; }
+
   /* Header mega-menu: hovering the nav bar reveals one full-width panel
      with every category's sub-links shown side by side, mirroring the
      reference site rather than a per-item dropdown. */
@@ -304,20 +341,26 @@
           <div>문의 · 031-000-0000 / hwaseongwest@example.com</div>
         </div>
       </div>
-      <form id="join-form" class="card blueprint" style="padding:24px" action="https://formsubmit.co/hwaseongwest@example.com" method="POST">
-        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <form id="join-form" class="jf-card" action="https://formsubmit.co/hwaseongwest@example.com" method="POST">
         <input type="hidden" name="_subject" value="[화성서부리틀야구단] 입단 신청서 접수">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="_honey" style="display:none">
-        <div style="display:grid; gap:14px">
-          <div class="field"><label>학생 이름</label><input class="input" name="student_name" placeholder="홍길동" required></div>
-          <div class="field"><label>학년</label><input class="input" name="grade" placeholder="초등 3학년" required></div>
-          <div class="field"><label>보호자 연락처</label><input class="input" name="guardian_phone" placeholder="010-0000-0000" required></div>
-          <div class="field"><label>문의 내용</label><textarea class="input" name="message" placeholder="야구 경험, 참관 희망일 등을 적어주세요."></textarea></div>
-          <button type="submit" class="btn btn-primary btn-block" style="background:#d1491f; border-color:#d1491f; color:#fff; height:44px; font-size:16px">신청서 보내기</button>
-          <div id="join-success" style="display:none; font-size:14px; color:var(--color-accent-700)">접수되었습니다. 담당 코치가 연락드리겠습니다.</div>
-          <div id="join-error" style="display:none; font-size:14px; color:#b3261e">전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.</div>
+        <div style="margin-bottom:22px">
+          <span style="display:inline-block; width:36px; height:4px; background:#d1491f; border-radius:2px; margin-bottom:14px"></span>
+          <h3 style="font-size:23px; margin:0; color:#16233f">입단 신청서</h3>
+          <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">작성해 주시면 담당 코치가 빠르게 연락드립니다.</p>
+        </div>
+        <div style="display:grid; gap:16px">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
+            <div class="jf-field"><label class="jf-label">학생 이름</label><input class="jf-input" name="student_name" placeholder="홍길동" required></div>
+            <div class="jf-field"><label class="jf-label">학년</label><input class="jf-input" name="grade" placeholder="초등 3학년" required></div>
+          </div>
+          <div class="jf-field"><label class="jf-label">보호자 연락처</label><input class="jf-input" name="guardian_phone" placeholder="010-0000-0000" required></div>
+          <div class="jf-field"><label class="jf-label">문의 내용</label><textarea class="jf-input" name="message" placeholder="야구 경험, 참관 희망일 등을 적어주세요."></textarea></div>
+          <button type="submit" class="jf-submit">신청서 보내기 <span aria-hidden="true">→</span></button>
+          <div id="join-success" class="jf-alert jf-alert-success">✓ 접수되었습니다. 담당 코치가 연락드리겠습니다.</div>
+          <div id="join-error" class="jf-alert jf-alert-error">전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.</div>
         </div>
       </form>
     </div>
@@ -353,13 +396,13 @@
       headers: { 'Accept': 'application/json' }
     }).then(function (res) {
       if (res.ok) {
-        success.style.display = 'block';
+        success.style.display = 'flex';
         form.reset();
       } else {
-        error.style.display = 'block';
+        error.style.display = 'flex';
       }
     }).catch(function () {
-      error.style.display = 'block';
+      error.style.display = 'flex';
     });
   });
 })();
