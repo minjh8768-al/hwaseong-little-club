@@ -79,9 +79,9 @@
   .jf-alert-success { background: #eaf6ee; color: #1f7a3f; }
   .jf-alert-error { background: #fdecea; color: #b3261e; }
 
-  /* Signup modal, opened from the "회원가입" link in the top utility bar */
-  #signup-modal { display: none; position: fixed; inset: 0; z-index: 60; }
-  #signup-modal.open { display: block; }
+  /* Signup/login modals, opened from the top utility bar */
+  #signup-modal, #login-modal { display: none; position: fixed; inset: 0; z-index: 60; }
+  #signup-modal.open, #login-modal.open { display: block; }
   .signup-modal-backdrop { position: absolute; inset: 0; background: rgba(15,25,50,.55); }
   .signup-modal-panel {
     position: relative; max-width: 460px; margin: 6vh auto 6vh; max-height: 88vh;
