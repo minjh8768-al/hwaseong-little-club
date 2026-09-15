@@ -169,6 +169,10 @@
     if (joinForm && join.email) {
       joinForm.setAttribute('data-notify-email', join.email);
     }
+    var applyForm = document.getElementById('apply-form');
+    if (applyForm && join.email) {
+      applyForm.setAttribute('data-notify-email', join.email);
+    }
     var footerContact = document.getElementById('footer-contact');
     if (footerContact) {
       footerContact.textContent = '경기도 화성시 · ' + (join.phone || '') + ' · ' + (join.email || '');

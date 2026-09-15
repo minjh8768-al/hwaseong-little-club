@@ -330,37 +330,59 @@
   </section>
 
   <section id="join" style="border-top:1px solid var(--color-divider); background:#fff">
-    <div style="max-width:1240px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:48px">
-      <div>
+    <div style="max-width:1240px; margin:0 auto; padding:72px 24px">
+      <div style="max-width:640px; margin-bottom:40px">
         <span style="font-size:12px; letter-spacing:.16em; color:var(--color-neutral-600)">JOIN THE CLUB</span>
         <h2 style="font-size:38px; margin:6px 0 16px">입단 안내</h2>
-        <p style="font-size:16px; max-width:480px">초등 1~6학년이면 누구나 지원할 수 있습니다. 회원가입하시면 우리 선수단의 성장 기록 서비스 <a href="https://littleball-growth.vercel.app" target="_blank" rel="noopener">PLAYLOG</a>에도 바로 연결돼서, 자녀의 훈련 일지를 기록하고 볼 수 있어요.</p>
+        <p style="font-size:16px">초등 1~6학년이면 누구나 지원할 수 있습니다. 문의만 남기셔도 되고, 회원가입하시면 선수 성장 기록 서비스 <a href="https://littleball-growth.vercel.app" target="_blank" rel="noopener">PLAYLOG</a> 계정도 바로 함께 만들어져요.</p>
         <div id="join-info" style="margin-top:24px; font-size:15px; line-height:2">
           <div>훈련장 · 화성시 서부 야구장</div>
           <div>훈련일 · 토·일 09:00 – 13:00, 수 17:00 – 19:00</div>
           <div>문의 · 031-000-0000 / hwaseongwest@example.com</div>
         </div>
       </div>
-      <form id="join-form" class="jf-card">
-        <div style="margin-bottom:22px">
-          <span style="display:inline-block; width:36px; height:4px; background:#d1491f; border-radius:2px; margin-bottom:14px"></span>
-          <h3 style="font-size:23px; margin:0; color:#16233f">입단 신청 · 회원가입</h3>
-          <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">가입하시면 PLAYLOG 선수 계정도 함께 만들어집니다.</p>
-        </div>
-        <div style="display:grid; gap:16px">
-          <div class="jf-field"><label class="jf-label">보호자 이메일</label><input class="jf-input" type="email" name="guardian_email" placeholder="parent@example.com" required></div>
-          <div class="jf-field"><label class="jf-label">비밀번호 (6자 이상)</label><input class="jf-input" type="password" name="password" placeholder="••••••••" minlength="6" required></div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
-            <div class="jf-field"><label class="jf-label">선수(학생) 이름</label><input class="jf-input" name="player_name" placeholder="홍길동" required></div>
-            <div class="jf-field"><label class="jf-label">출생연도</label><input class="jf-input" type="number" name="birth_year" placeholder="2015" min="2005" max="2022" required></div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:32px">
+        <form id="apply-form" class="jf-card">
+          <div style="margin-bottom:22px">
+            <span style="display:inline-block; width:36px; height:4px; background:#16233f; border-radius:2px; margin-bottom:14px"></span>
+            <h3 style="font-size:23px; margin:0; color:#16233f">입단 신청서</h3>
+            <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">계정 없이 문의만 남길 수 있어요. 담당자가 연락드립니다.</p>
           </div>
-          <div class="jf-field"><label class="jf-label">문의 내용 (선택)</label><textarea class="jf-input" name="message" placeholder="야구 경험, 참관 희망일 등을 적어주세요."></textarea></div>
-          <button type="submit" class="jf-submit"><span class="jf-submit-label">가입하고 신청하기</span> <span aria-hidden="true">→</span></button>
-          <div id="join-success" class="jf-alert jf-alert-success">✓ 가입이 완료됐습니다. PLAYLOG 계정도 함께 만들어졌어요 — 같은 이메일/비밀번호로 로그인하실 수 있습니다.</div>
-          <div id="join-pending" class="jf-alert" style="background:#fff4e5; color:#8a5a00">이메일로 발송된 인증 링크를 눌러 확인해 주세요. 인증 후 로그인하시면 선수 등록이 완료됩니다.</div>
-          <div id="join-error" class="jf-alert jf-alert-error">전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.</div>
-        </div>
-      </form>
+          <div style="display:grid; gap:16px">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
+              <div class="jf-field"><label class="jf-label">보호자 성함</label><input class="jf-input" name="guardian_name" placeholder="홍길동" required></div>
+              <div class="jf-field"><label class="jf-label">연락처</label><input class="jf-input" type="tel" name="phone" placeholder="010-0000-0000" required></div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
+              <div class="jf-field"><label class="jf-label">선수(학생) 이름</label><input class="jf-input" name="player_name" placeholder="홍길동" required></div>
+              <div class="jf-field"><label class="jf-label">출생연도</label><input class="jf-input" type="number" name="birth_year" placeholder="2015" min="2005" max="2022" required></div>
+            </div>
+            <div class="jf-field"><label class="jf-label">문의 내용 (선택)</label><textarea class="jf-input" name="message" placeholder="야구 경험, 참관 희망일 등을 적어주세요."></textarea></div>
+            <button type="submit" class="jf-submit"><span class="jf-submit-label">신청서 보내기</span> <span aria-hidden="true">→</span></button>
+            <div id="apply-success" class="jf-alert jf-alert-success">✓ 신청서가 전송됐습니다. 곧 연락드릴게요.</div>
+            <div id="apply-error" class="jf-alert jf-alert-error">전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.</div>
+          </div>
+        </form>
+        <form id="join-form" class="jf-card">
+          <div style="margin-bottom:22px">
+            <span style="display:inline-block; width:36px; height:4px; background:#d1491f; border-radius:2px; margin-bottom:14px"></span>
+            <h3 style="font-size:23px; margin:0; color:#16233f">회원가입 · PLAYLOG 계정 만들기</h3>
+            <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">가입하시면 PLAYLOG 선수 계정도 함께 만들어집니다.</p>
+          </div>
+          <div style="display:grid; gap:16px">
+            <div class="jf-field"><label class="jf-label">보호자 이메일</label><input class="jf-input" type="email" name="guardian_email" placeholder="parent@example.com" required></div>
+            <div class="jf-field"><label class="jf-label">비밀번호 (6자 이상)</label><input class="jf-input" type="password" name="password" placeholder="••••••••" minlength="6" required></div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
+              <div class="jf-field"><label class="jf-label">선수(학생) 이름</label><input class="jf-input" name="player_name" placeholder="홍길동" required></div>
+              <div class="jf-field"><label class="jf-label">출생연도</label><input class="jf-input" type="number" name="birth_year" placeholder="2015" min="2005" max="2022" required></div>
+            </div>
+            <button type="submit" class="jf-submit"><span class="jf-submit-label">회원가입</span> <span aria-hidden="true">→</span></button>
+            <div id="join-success" class="jf-alert jf-alert-success">✓ 가입이 완료됐습니다. PLAYLOG 계정도 함께 만들어졌어요 — 같은 이메일/비밀번호로 로그인하실 수 있습니다.</div>
+            <div id="join-pending" class="jf-alert" style="background:#fff4e5; color:#8a5a00">이메일로 발송된 인증 링크를 눌러 확인해 주세요. 인증 후 로그인하시면 선수 등록이 완료됩니다.</div>
+            <div id="join-error" class="jf-alert jf-alert-error">전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.</div>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -377,6 +399,48 @@
 
 </div>
 
+<script>
+(function () {
+  var form = document.getElementById('apply-form');
+  var success = document.getElementById('apply-success');
+  var error = document.getElementById('apply-error');
+  var submitBtn = form ? form.querySelector('.jf-submit') : null;
+  var submitLabel = form ? form.querySelector('.jf-submit-label') : null;
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    success.style.display = 'none';
+    error.style.display = 'none';
+    var notifyEmail = form.getAttribute('data-notify-email');
+    if (!notifyEmail) { error.textContent = '문의 접수처가 설정되지 않았어요. 전화로 문의해 주세요.'; error.style.display = 'flex'; return; }
+    if (submitBtn) submitBtn.disabled = true;
+    if (submitLabel) submitLabel.textContent = '전송 중...';
+
+    var fd = new FormData();
+    fd.append('_subject', '[화성서부리틀야구단] 새 입단 신청서');
+    fd.append('guardian_name', form.querySelector('[name="guardian_name"]').value.trim());
+    fd.append('phone', form.querySelector('[name="phone"]').value.trim());
+    fd.append('player_name', form.querySelector('[name="player_name"]').value.trim());
+    fd.append('birth_year', form.querySelector('[name="birth_year"]').value.trim());
+    fd.append('message', form.querySelector('[name="message"]').value);
+    fd.append('_template', 'table');
+    fd.append('_captcha', 'false');
+
+    fetch('https://formsubmit.co/' + notifyEmail, { method: 'POST', body: fd }).then(function (res) {
+      if (!res.ok) throw new Error('전송 실패');
+      success.style.display = 'flex';
+      form.reset();
+    }).catch(function () {
+      error.textContent = '전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.';
+      error.style.display = 'flex';
+    }).finally(function () {
+      if (submitBtn) submitBtn.disabled = false;
+      if (submitLabel) submitLabel.textContent = '신청서 보내기';
+    });
+  });
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 (function () {
@@ -414,7 +478,6 @@
     var password = form.querySelector('[name="password"]').value;
     var playerName = form.querySelector('[name="player_name"]').value.trim();
     var birthYear = parseInt(form.querySelector('[name="birth_year"]').value, 10);
-    var message = form.querySelector('[name="message"]').value;
 
     sb.auth.signUp({ email: email, password: password }).then(function (res) {
       if (res.error) { showError(res.error.message); return; }
@@ -448,7 +511,6 @@
           fd.append('guardian_email', email);
           fd.append('player_name', playerName);
           fd.append('birth_year', String(birthYear));
-          fd.append('message', message);
           fd.append('_template', 'table');
           fd.append('_captcha', 'false');
           fetch('https://formsubmit.co/' + notifyEmail, { method: 'POST', body: fd }).catch(function () {});
@@ -458,7 +520,7 @@
       showError(err && err.message);
     }).finally(function () {
       if (submitBtn) submitBtn.disabled = false;
-      if (submitLabel) submitLabel.textContent = '가입하고 신청하기';
+      if (submitLabel) submitLabel.textContent = '회원가입';
     });
   });
 })();
