@@ -99,6 +99,16 @@ collections:
               - { label: "포지션 · 학년", name: "position", widget: "string" }
               - { label: "프로필 사진", name: "photo", widget: "image", required: false }
 
+          - label: "졸업생 · 진로현황"
+            name: "graduates"
+            widget: "list"
+            fields:
+              - { label: "이름", name: "name", widget: "string" }
+              - { label: "졸업연도 (예: 2024)", name: "grad_year", widget: "string" }
+              - { label: "진학·진로 (예: 화성중학교 야구부 진학)", name: "destination", widget: "string" }
+              - { label: "한줄 소감 (선택)", name: "note", widget: "text", required: false }
+              - { label: "사진", name: "photo", widget: "image", required: false }
+
           - label: "공지 · 소식"
             name: "news"
             widget: "list"

@@ -139,6 +139,22 @@
       "photo": "/assets/uploads/kakaotalk_20260911_113351810.png"
     }
   ],
+  "graduates": [
+    {
+      "photo": "",
+      "name": "홍길동",
+      "grad_year": "2024",
+      "destination": "화성중학교 야구부 진학",
+      "note": "리틀야구단에서 배운 기본기가 큰 도움이 됐습니다."
+    },
+    {
+      "photo": "",
+      "name": "김민재",
+      "grad_year": "2023",
+      "destination": "수원북중학교 야구부 진학",
+      "note": ""
+    }
+  ],
   "gallery": [
     {
       "photo": ""
