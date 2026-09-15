@@ -167,7 +167,7 @@
     }
     var joinForm = document.getElementById('join-form');
     if (joinForm && join.email) {
-      joinForm.action = 'https://formsubmit.co/' + join.email;
+      joinForm.setAttribute('data-notify-email', join.email);
     }
     var footerContact = document.getElementById('footer-contact');
     if (footerContact) {

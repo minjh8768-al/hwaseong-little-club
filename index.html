@@ -334,32 +334,30 @@
       <div>
         <span style="font-size:12px; letter-spacing:.16em; color:var(--color-neutral-600)">JOIN THE CLUB</span>
         <h2 style="font-size:38px; margin:6px 0 16px">입단 안내</h2>
-        <p style="font-size:16px; max-width:480px">초등 1~6학년이면 누구나 지원할 수 있습니다. 아래 정보를 남겨주시면 담당 코치가 연락드립니다. 훈련 참관은 상시 가능합니다.</p>
+        <p style="font-size:16px; max-width:480px">초등 1~6학년이면 누구나 지원할 수 있습니다. 회원가입하시면 우리 선수단의 성장 기록 서비스 <a href="https://littleball-growth.vercel.app" target="_blank" rel="noopener">PLAYLOG</a>에도 바로 연결돼서, 자녀의 훈련 일지를 기록하고 볼 수 있어요.</p>
         <div id="join-info" style="margin-top:24px; font-size:15px; line-height:2">
           <div>훈련장 · 화성시 서부 야구장</div>
           <div>훈련일 · 토·일 09:00 – 13:00, 수 17:00 – 19:00</div>
           <div>문의 · 031-000-0000 / hwaseongwest@example.com</div>
         </div>
       </div>
-      <form id="join-form" class="jf-card" action="https://formsubmit.co/hwaseongwest@example.com" method="POST">
-        <input type="hidden" name="_subject" value="[화성서부리틀야구단] 입단 신청서 접수">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="_honey" style="display:none">
+      <form id="join-form" class="jf-card">
         <div style="margin-bottom:22px">
           <span style="display:inline-block; width:36px; height:4px; background:#d1491f; border-radius:2px; margin-bottom:14px"></span>
-          <h3 style="font-size:23px; margin:0; color:#16233f">입단 신청서</h3>
-          <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">작성해 주시면 담당 코치가 빠르게 연락드립니다.</p>
+          <h3 style="font-size:23px; margin:0; color:#16233f">입단 신청 · 회원가입</h3>
+          <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">가입하시면 PLAYLOG 선수 계정도 함께 만들어집니다.</p>
         </div>
         <div style="display:grid; gap:16px">
+          <div class="jf-field"><label class="jf-label">보호자 이메일</label><input class="jf-input" type="email" name="guardian_email" placeholder="parent@example.com" required></div>
+          <div class="jf-field"><label class="jf-label">비밀번호 (6자 이상)</label><input class="jf-input" type="password" name="password" placeholder="••••••••" minlength="6" required></div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
-            <div class="jf-field"><label class="jf-label">학생 이름</label><input class="jf-input" name="student_name" placeholder="홍길동" required></div>
-            <div class="jf-field"><label class="jf-label">학년</label><input class="jf-input" name="grade" placeholder="초등 3학년" required></div>
+            <div class="jf-field"><label class="jf-label">선수(학생) 이름</label><input class="jf-input" name="player_name" placeholder="홍길동" required></div>
+            <div class="jf-field"><label class="jf-label">출생연도</label><input class="jf-input" type="number" name="birth_year" placeholder="2015" min="2005" max="2022" required></div>
           </div>
-          <div class="jf-field"><label class="jf-label">보호자 연락처</label><input class="jf-input" name="guardian_phone" placeholder="010-0000-0000" required></div>
-          <div class="jf-field"><label class="jf-label">문의 내용</label><textarea class="jf-input" name="message" placeholder="야구 경험, 참관 희망일 등을 적어주세요."></textarea></div>
-          <button type="submit" class="jf-submit">신청서 보내기 <span aria-hidden="true">→</span></button>
-          <div id="join-success" class="jf-alert jf-alert-success">✓ 접수되었습니다. 담당 코치가 연락드리겠습니다.</div>
+          <div class="jf-field"><label class="jf-label">문의 내용 (선택)</label><textarea class="jf-input" name="message" placeholder="야구 경험, 참관 희망일 등을 적어주세요."></textarea></div>
+          <button type="submit" class="jf-submit"><span class="jf-submit-label">가입하고 신청하기</span> <span aria-hidden="true">→</span></button>
+          <div id="join-success" class="jf-alert jf-alert-success">✓ 가입이 완료됐습니다. PLAYLOG 계정도 함께 만들어졌어요 — 같은 이메일/비밀번호로 로그인하실 수 있습니다.</div>
+          <div id="join-pending" class="jf-alert" style="background:#fff4e5; color:#8a5a00">이메일로 발송된 인증 링크를 눌러 확인해 주세요. 인증 후 로그인하시면 선수 등록이 완료됩니다.</div>
           <div id="join-error" class="jf-alert jf-alert-error">전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.</div>
         </div>
       </form>
@@ -379,30 +377,88 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 (function () {
   var form = document.getElementById('join-form');
   var success = document.getElementById('join-success');
+  var pending = document.getElementById('join-pending');
   var error = document.getElementById('join-error');
+  var submitBtn = form ? form.querySelector('.jf-submit') : null;
+  var submitLabel = form ? form.querySelector('.jf-submit-label') : null;
   if (!form) return;
+
+  var sb = window.supabase.createClient(
+    'https://nxvrgpftrzucsrryewpa.supabase.co',
+    'sb_publishable_lItXX0oTdqFZ23RVqkJIWg_ojVM7Vj1'
+  );
+
+  function hideAlerts() {
+    success.style.display = 'none';
+    pending.style.display = 'none';
+    error.style.display = 'none';
+  }
+
+  function showError(msg) {
+    error.textContent = msg || '문제가 발생했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.';
+    error.style.display = 'flex';
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    error.style.display = 'none';
-    success.style.display = 'none';
-    var data = new FormData(form);
-    fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function (res) {
-      if (res.ok) {
+    hideAlerts();
+    if (submitBtn) submitBtn.disabled = true;
+    if (submitLabel) submitLabel.textContent = '처리 중...';
+
+    var email = form.querySelector('[name="guardian_email"]').value.trim();
+    var password = form.querySelector('[name="password"]').value;
+    var playerName = form.querySelector('[name="player_name"]').value.trim();
+    var birthYear = parseInt(form.querySelector('[name="birth_year"]').value, 10);
+    var message = form.querySelector('[name="message"]').value;
+
+    sb.auth.signUp({ email: email, password: password }).then(function (res) {
+      if (res.error) { showError(res.error.message); return; }
+      var user = res.data && res.data.user;
+      var session = res.data && res.data.session;
+
+      if (!session) {
+        pending.style.display = 'flex';
+        form.reset();
+        return;
+      }
+
+      return sb.from('players').insert({
+        parent_user_id: user.id,
+        name: playerName,
+        birth_year: birthYear,
+        school: null,
+        club_name: '화성서부리틀야구단',
+        sport: '야구',
+        position: null,
+        dominant_hand: null
+      }).then(function (insertRes) {
+        if (insertRes.error) { showError('계정은 만들어졌지만 선수 등록에 실패했어요: ' + insertRes.error.message); return; }
         success.style.display = 'flex';
         form.reset();
-      } else {
-        error.style.display = 'flex';
-      }
-    }).catch(function () {
-      error.style.display = 'flex';
+
+        var notifyEmail = form.getAttribute('data-notify-email');
+        if (notifyEmail) {
+          var fd = new FormData();
+          fd.append('_subject', '[화성서부리틀야구단] 새 회원가입 · 선수 등록');
+          fd.append('guardian_email', email);
+          fd.append('player_name', playerName);
+          fd.append('birth_year', String(birthYear));
+          fd.append('message', message);
+          fd.append('_template', 'table');
+          fd.append('_captcha', 'false');
+          fetch('https://formsubmit.co/' + notifyEmail, { method: 'POST', body: fd }).catch(function () {});
+        }
+      });
+    }).catch(function (err) {
+      showError(err && err.message);
+    }).finally(function () {
+      if (submitBtn) submitBtn.disabled = false;
+      if (submitLabel) submitLabel.textContent = '가입하고 신청하기';
     });
   });
 })();
