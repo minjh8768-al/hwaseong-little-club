@@ -97,15 +97,15 @@
       aboutTiles.innerHTML = tiles.map(function (t) {
         var pos = t.position || 'center';
         var imgStyle = ' object-position:' + esc(pos) + ';';
-        return '<a href="' + t.href + '" class="about-tile" style="position:relative; display:block; overflow:hidden; text-decoration:none; --tile-h:' + tileHeight + 'px">' +
+        return '<a href="' + t.href + '" class="about-tile" style="position:relative; display:block; overflow:hidden; border-radius:20px; text-decoration:none; --tile-h:' + tileHeight + 'px">' +
           '<div class="about-tile-img about-tile-img-base">' + photoOrPlaceholder(t.photo, t.title + ' 사진', imgStyle) + '</div>' +
           (t.hover ? '<div class="about-tile-img about-tile-img-hover">' + photoOrPlaceholder(t.hover, t.title + ' 사진 2', imgStyle) + '</div>' : '') +
-          '<div style="position:absolute; left:0; bottom:0; display:flex; align-items:center; gap:14px; background:#16233f; padding:14px 18px; max-width:88%">' +
+          '<div style="position:absolute; left:14px; bottom:14px; display:flex; align-items:center; gap:14px; background:#16233f; padding:14px 18px; max-width:calc(100% - 28px); border-radius:14px">' +
           '<div>' +
           '<div style="font-size:11px; color:#9fb3cf; letter-spacing:.06em; margin-bottom:2px">화성시 서부리틀야구단</div>' +
           '<div style="font-size:20px; font-weight:800; color:#fff">' + esc(t.title) + '</div>' +
           '</div>' +
-          '<span style="flex:none; width:34px; height:34px; border:2px solid #fff; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px">→</span>' +
+          '<span style="flex:none; width:34px; height:34px; border:2px solid #fff; border-radius:999px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px">→</span>' +
           '</div></a>';
       }).join('');
     }
