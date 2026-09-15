@@ -60,8 +60,7 @@
     var newsGrid = document.getElementById('news-grid');
     if (newsGrid && Array.isArray(data.news)) {
       newsGrid.innerHTML = data.news.map(function (n) {
-        return '<article class="card blueprint" style="padding:0; overflow:hidden">' +
-          '<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>' +
+        return '<article style="padding:0; overflow:hidden; border-radius:16px; border:1px solid var(--color-divider); background:#fff">' +
           '<div style="height:170px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지') + '</div>' +
           '<div style="padding:18px">' +
           '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
@@ -114,7 +113,7 @@
     var rosterGrid = document.getElementById('roster-grid');
     if (rosterGrid && Array.isArray(data.roster)) {
       rosterGrid.innerHTML = data.roster.map(function (p) {
-        return '<div style="overflow:hidden; border:1px solid rgba(255,255,255,.18)">' +
+        return '<div style="overflow:hidden; border-radius:14px; border:1px solid rgba(255,255,255,.18)">' +
           '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(p.photo, '프로필 사진') + '</div>' +
           '<div style="background:#0f1932; padding:8px 10px">' +
           '<div style="display:flex; align-items:baseline; justify-content:space-between; gap:6px">' +
@@ -130,7 +129,7 @@
     var galleryGrid = document.getElementById('gallery-grid');
     if (galleryGrid && Array.isArray(data.gallery)) {
       galleryGrid.innerHTML = data.gallery.map(function (g) {
-        return '<div style="aspect-ratio:4/3; border:1px solid var(--color-divider); overflow:hidden">' +
+        return '<div style="aspect-ratio:4/3; border:1px solid var(--color-divider); overflow:hidden; border-radius:14px">' +
           photoOrPlaceholder(g.photo, '사진') + '</div>';
       }).join('');
     }
