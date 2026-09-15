@@ -346,19 +346,18 @@
   </section>
 
   <section id="join" style="border-top:1px solid var(--color-divider); background:#fff">
-    <div style="max-width:1240px; margin:0 auto; padding:72px 24px">
-      <div style="max-width:640px; margin-bottom:40px">
+    <div style="max-width:1240px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:48px">
+      <div>
         <span style="font-size:12px; letter-spacing:.16em; color:var(--color-neutral-600)">JOIN THE CLUB</span>
         <h2 style="font-size:38px; margin:6px 0 16px">입단 안내</h2>
-        <p style="font-size:16px">초등 1~6학년이면 누구나 지원할 수 있습니다. 문의만 남기셔도 되고, 회원가입하시면 선수 성장 기록 서비스 <a href="https://littleball-growth.vercel.app" target="_blank" rel="noopener">PLAYLOG</a> 계정도 바로 함께 만들어져요.</p>
+        <p style="font-size:16px; max-width:480px">초등 1~6학년이면 누구나 지원할 수 있습니다. 문의만 남기셔도 되고, 회원가입하시면 선수 성장 기록 서비스 <a href="https://littleball-growth.vercel.app" target="_blank" rel="noopener">PLAYLOG</a> 계정도 바로 함께 만들어져요.</p>
         <div id="join-info" style="margin-top:24px; font-size:15px; line-height:2">
           <div>훈련장 · 화성시 서부 야구장</div>
           <div>훈련일 · 토·일 09:00 – 13:00, 수 17:00 – 19:00</div>
           <div>문의 · 031-000-0000 / hwaseongwest@example.com</div>
         </div>
       </div>
-      <div style="max-width:640px">
-        <form id="apply-form" class="jf-card">
+      <form id="apply-form" class="jf-card">
           <div style="margin-bottom:22px">
             <span style="display:inline-block; width:36px; height:4px; background:#d1491f; border-radius:2px; margin-bottom:14px"></span>
             <h3 style="font-size:23px; margin:0; color:#16233f">입단 신청서</h3>
@@ -379,7 +378,6 @@
             <div id="apply-error" class="jf-alert jf-alert-error">전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.</div>
           </div>
         </form>
-      </div>
     </div>
   </section>
 
