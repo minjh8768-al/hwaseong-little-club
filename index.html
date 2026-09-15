@@ -400,18 +400,34 @@
         <div style="margin-bottom:22px">
           <span style="display:inline-block; width:36px; height:4px; background:#d1491f; border-radius:2px; margin-bottom:14px"></span>
           <h3 style="font-size:23px; margin:0; color:#16233f">회원가입 · PLAYLOG 계정 만들기</h3>
-          <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">가입하시면 PLAYLOG 선수 계정도 함께 만들어집니다.</p>
+          <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">가입하시면 PLAYLOG 계정도 함께 만들어집니다.</p>
         </div>
         <div style="display:grid; gap:16px">
-          <div class="jf-field"><label class="jf-label">보호자 이메일</label><input class="jf-input" type="email" name="guardian_email" placeholder="parent@example.com" required></div>
+          <div class="jf-field">
+            <label class="jf-label">누구로 가입하시나요?</label>
+            <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:2px">
+              <label style="display:flex; align-items:center; gap:6px; font-size:14px; color:#16233f; font-weight:500">
+                <input type="radio" name="role" value="parent" checked> 학부모
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:14px; color:#16233f; font-weight:500">
+                <input type="radio" name="role" value="player"> 선수 본인
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:14px; color:#16233f; font-weight:500">
+                <input type="radio" name="role" value="coach"> 코치
+              </label>
+            </div>
+          </div>
+          <div class="jf-field"><label class="jf-label" id="join-name-label">보호자 성함</label><input class="jf-input" name="name" placeholder="홍길동" required></div>
+          <div class="jf-field"><label class="jf-label">이메일</label><input class="jf-input" type="email" name="guardian_email" placeholder="parent@example.com" required></div>
           <div class="jf-field"><label class="jf-label">비밀번호 (6자 이상)</label><input class="jf-input" type="password" name="password" placeholder="••••••••" minlength="6" required></div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
-            <div class="jf-field"><label class="jf-label">선수(학생) 이름</label><input class="jf-input" name="player_name" placeholder="홍길동" required></div>
+          <div id="join-player-fields" style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
+            <div class="jf-field" id="join-player-name-field"><label class="jf-label">선수(자녀) 이름</label><input class="jf-input" name="player_name" placeholder="홍길동" required></div>
             <div class="jf-field"><label class="jf-label">출생연도</label><input class="jf-input" type="number" name="birth_year" placeholder="2015" min="2005" max="2022" required></div>
           </div>
+          <p id="join-coach-note" class="jf-alert" style="display:none; background:#eef2fa; color:#16233f">코치로 가입하면 계정이 먼저 만들어지고, 이후 PLAYLOG에서 팀을 만들거나 코치 코드로 참여할 수 있어요.</p>
           <button type="submit" class="jf-submit"><span class="jf-submit-label">회원가입</span> <span aria-hidden="true">→</span></button>
           <div id="join-success" class="jf-alert jf-alert-success">✓ 가입이 완료됐습니다. PLAYLOG 계정도 함께 만들어졌어요 — 같은 이메일/비밀번호로 로그인하실 수 있습니다.</div>
-          <div id="join-pending" class="jf-alert" style="background:#fff4e5; color:#8a5a00">이메일로 발송된 인증 링크를 눌러 확인해 주세요. 인증 후 로그인하시면 선수 등록이 완료됩니다.</div>
+          <div id="join-pending" class="jf-alert" style="background:#fff4e5; color:#8a5a00">이메일로 발송된 인증 링크를 눌러 확인해 주세요. 인증 후 로그인하시면 등록이 완료됩니다.</div>
           <div id="join-error" class="jf-alert jf-alert-error">전송에 실패했습니다. 잠시 후 다시 시도하거나 전화로 문의해 주세요.</div>
         </div>
       </form>
@@ -478,6 +494,40 @@
     'sb_publishable_lItXX0oTdqFZ23RVqkJIWg_ojVM7Vj1'
   );
 
+  var nameLabel = document.getElementById('join-name-label');
+  var playerFields = document.getElementById('join-player-fields');
+  var playerNameField = document.getElementById('join-player-name-field');
+  var coachNote = document.getElementById('join-coach-note');
+  var playerNameInput = form.querySelector('[name="player_name"]');
+  var birthYearInput = form.querySelector('[name="birth_year"]');
+  var roleLabels = { parent: '보호자 성함', player: '선수 본인 이름', coach: '코치 성함' };
+
+  function currentRole() {
+    var checked = form.querySelector('input[name="role"]:checked');
+    return checked ? checked.value : 'parent';
+  }
+
+  function updateRoleUI() {
+    var role = currentRole();
+    nameLabel.textContent = roleLabels[role];
+    if (role === 'coach') {
+      playerFields.style.display = 'none';
+      coachNote.style.display = 'block';
+      playerNameInput.required = false;
+      birthYearInput.required = false;
+    } else {
+      playerFields.style.display = 'grid';
+      coachNote.style.display = 'none';
+      playerNameField.style.display = (role === 'player') ? 'none' : '';
+      playerNameInput.required = (role === 'parent');
+      birthYearInput.required = true;
+    }
+  }
+  form.querySelectorAll('input[name="role"]').forEach(function (r) {
+    r.addEventListener('change', updateRoleUI);
+  });
+  updateRoleUI();
+
   function hideAlerts() {
     success.style.display = 'none';
     pending.style.display = 'none';
@@ -495,12 +545,18 @@
     if (submitBtn) submitBtn.disabled = true;
     if (submitLabel) submitLabel.textContent = '처리 중...';
 
+    var role = currentRole();
+    var name = form.querySelector('[name="name"]').value.trim();
     var email = form.querySelector('[name="guardian_email"]').value.trim();
     var password = form.querySelector('[name="password"]').value;
-    var playerName = form.querySelector('[name="player_name"]').value.trim();
-    var birthYear = parseInt(form.querySelector('[name="birth_year"]').value, 10);
+    var playerName = (role === 'player') ? name : playerNameInput.value.trim();
+    var birthYear = (role === 'coach') ? null : parseInt(birthYearInput.value, 10);
 
-    sb.auth.signUp({ email: email, password: password }).then(function (res) {
+    sb.auth.signUp({
+      email: email,
+      password: password,
+      options: { data: { name: name, role: role } }
+    }).then(function (res) {
       if (res.error) { showError(res.error.message); return; }
       var user = res.data && res.data.user;
       var session = res.data && res.data.session;
@@ -511,8 +567,35 @@
         return;
       }
 
-      return sb.from('players').insert({
-        parent_user_id: user.id,
+      var afterInsert = function () {
+        success.style.display = 'flex';
+        form.reset();
+        updateRoleUI();
+
+        var notifyEmail = form.getAttribute('data-notify-email');
+        if (notifyEmail) {
+          var fd = new FormData();
+          fd.append('_subject', '[화성서부리틀야구단] 새 회원가입 (' + role + ')');
+          fd.append('name', name);
+          fd.append('email', email);
+          if (role !== 'coach') {
+            fd.append('player_name', playerName);
+            fd.append('birth_year', String(birthYear));
+          }
+          fd.append('_template', 'table');
+          fd.append('_captcha', 'false');
+          fetch('https://formsubmit.co/' + notifyEmail, { method: 'POST', body: fd }).catch(function () {});
+        }
+      };
+
+      if (role === 'coach') {
+        afterInsert();
+        return;
+      }
+
+      var playerRow = {
+        parent_user_id: role === 'parent' ? user.id : null,
+        player_user_id: role === 'player' ? user.id : null,
         name: playerName,
         birth_year: birthYear,
         school: null,
@@ -520,22 +603,11 @@
         sport: '야구',
         position: null,
         dominant_hand: null
-      }).then(function (insertRes) {
-        if (insertRes.error) { showError('계정은 만들어졌지만 선수 등록에 실패했어요: ' + insertRes.error.message); return; }
-        success.style.display = 'flex';
-        form.reset();
+      };
 
-        var notifyEmail = form.getAttribute('data-notify-email');
-        if (notifyEmail) {
-          var fd = new FormData();
-          fd.append('_subject', '[화성서부리틀야구단] 새 회원가입 · 선수 등록');
-          fd.append('guardian_email', email);
-          fd.append('player_name', playerName);
-          fd.append('birth_year', String(birthYear));
-          fd.append('_template', 'table');
-          fd.append('_captcha', 'false');
-          fetch('https://formsubmit.co/' + notifyEmail, { method: 'POST', body: fd }).catch(function () {});
-        }
+      return sb.from('players').insert(playerRow).then(function (insertRes) {
+        if (insertRes.error) { showError('계정은 만들어졌지만 선수 등록에 실패했어요: ' + insertRes.error.message); return; }
+        afterInsert();
       });
     }).catch(function (err) {
       showError(err && err.message);
