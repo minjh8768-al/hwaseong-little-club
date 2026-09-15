@@ -183,7 +183,18 @@
         <span aria-hidden="true">|</span>
         <a href="#join" style="color:#d1491f; font-weight:700">입단 문의</a>
         <span aria-hidden="true">|</span>
-        <a href="#" id="signup-open" style="color:#16233f; font-weight:700">회원가입</a>
+        <span id="auth-guest">
+          <a href="#" id="login-open" style="color:#16233f; font-weight:700">로그인</a>
+          <span aria-hidden="true">|</span>
+          <a href="#" id="signup-open" style="color:#16233f; font-weight:700">회원가입</a>
+        </span>
+        <span id="auth-user" style="display:none">
+          <span id="auth-user-name" style="color:#16233f; font-weight:700"></span>님
+          <span aria-hidden="true">|</span>
+          <a href="https://littleball-growth.vercel.app/players" target="_blank" rel="noopener" style="color:#d1491f; font-weight:700">PLAYLOG</a>
+          <span aria-hidden="true">|</span>
+          <a href="#" id="logout-btn" style="color:var(--color-neutral-700)">로그아웃</a>
+        </span>
       </div>
     </div>
     <div class="nav-row" style="max-width:1650px; margin:0 auto; padding:14px 48px; display:grid; grid-template-columns:repeat(3,1fr) 108px repeat(3,1fr); align-items:center; border-bottom:3px solid #d1491f; position:relative">
@@ -434,6 +445,27 @@
     </div>
   </div>
 
+  <div id="login-modal" role="dialog" aria-modal="true" aria-label="로그인">
+    <div class="signup-modal-backdrop" id="login-modal-backdrop"></div>
+    <div class="signup-modal-panel">
+      <button type="button" class="signup-modal-close" id="login-modal-close" aria-label="닫기">✕</button>
+      <form id="login-form" class="jf-card">
+        <div style="margin-bottom:22px">
+          <span style="display:inline-block; width:36px; height:4px; background:#16233f; border-radius:2px; margin-bottom:14px"></span>
+          <h3 style="font-size:23px; margin:0; color:#16233f">로그인</h3>
+          <p style="font-size:13px; color:var(--color-neutral-600); margin:6px 0 0">PLAYLOG와 같은 계정으로 로그인하세요.</p>
+        </div>
+        <div style="display:grid; gap:16px">
+          <div class="jf-field"><label class="jf-label">이메일</label><input class="jf-input" type="email" name="email" placeholder="parent@example.com" required></div>
+          <div class="jf-field"><label class="jf-label">비밀번호</label><input class="jf-input" type="password" name="password" placeholder="••••••••" required></div>
+          <button type="submit" class="jf-submit" style="background:linear-gradient(135deg,#2a3a63,#16233f); box-shadow:0 10px 24px rgba(22,35,63,.28)"><span class="jf-submit-label">로그인</span> <span aria-hidden="true">→</span></button>
+          <div id="login-success" class="jf-alert jf-alert-success">✓ 로그인됐습니다. <a href="https://littleball-growth.vercel.app/players" target="_blank" rel="noopener">PLAYLOG에서 계속하기 →</a></div>
+          <div id="login-error" class="jf-alert jf-alert-error">이메일 또는 비밀번호가 올바르지 않습니다.</div>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -480,6 +512,14 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
+  // Shared client (same Supabase project as PLAYLOG) — one instance so the
+  // signup form, login form, and header auth-state all see the same session.
+  window.sbClient = window.supabase.createClient(
+    'https://nxvrgpftrzucsrryewpa.supabase.co',
+    'sb_publishable_lItXX0oTdqFZ23RVqkJIWg_ojVM7Vj1'
+  );
+</script>
+<script>
 (function () {
   var form = document.getElementById('join-form');
   var success = document.getElementById('join-success');
@@ -489,10 +529,7 @@
   var submitLabel = form ? form.querySelector('.jf-submit-label') : null;
   if (!form) return;
 
-  var sb = window.supabase.createClient(
-    'https://nxvrgpftrzucsrryewpa.supabase.co',
-    'sb_publishable_lItXX0oTdqFZ23RVqkJIWg_ojVM7Vj1'
-  );
+  var sb = window.sbClient;
 
   var nameLabel = document.getElementById('join-name-label');
   var playerFields = document.getElementById('join-player-fields');
@@ -620,19 +657,105 @@
 </script>
 <script>
 (function () {
-  var modal = document.getElementById('signup-modal');
-  var openBtn = document.getElementById('signup-open');
-  var closeBtn = document.getElementById('signup-modal-close');
-  var backdrop = document.getElementById('signup-modal-backdrop');
-  if (!modal || !openBtn) return;
-  function setOpen(open) {
-    modal.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+  // Same signInWithPassword call PLAYLOG's own login action uses, against
+  // the same Supabase project, so an account made on either site logs
+  // into both with the same email/password.
+  var form = document.getElementById('login-form');
+  var success = document.getElementById('login-success');
+  var error = document.getElementById('login-error');
+  var submitBtn = form ? form.querySelector('.jf-submit') : null;
+  var submitLabel = form ? form.querySelector('.jf-submit-label') : null;
+  if (!form) return;
+  var sb = window.sbClient;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    success.style.display = 'none';
+    error.style.display = 'none';
+    if (submitBtn) submitBtn.disabled = true;
+    if (submitLabel) submitLabel.textContent = '로그인 중...';
+
+    var email = form.querySelector('[name="email"]').value.trim();
+    var password = form.querySelector('[name="password"]').value;
+
+    sb.auth.signInWithPassword({ email: email, password: password }).then(function (res) {
+      if (res.error) {
+        error.textContent = '이메일 또는 비밀번호가 올바르지 않습니다.';
+        error.style.display = 'flex';
+        return;
+      }
+      success.style.display = 'flex';
+      form.reset();
+    }).catch(function () {
+      error.textContent = '문제가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+      error.style.display = 'flex';
+    }).finally(function () {
+      if (submitBtn) submitBtn.disabled = false;
+      if (submitLabel) submitLabel.textContent = '로그인';
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  // Reflects the shared Supabase session in the header: guest sees
+  // 로그인/회원가입, a signed-in visitor sees their name + PLAYLOG + 로그아웃.
+  var guestEl = document.getElementById('auth-guest');
+  var userEl = document.getElementById('auth-user');
+  var nameEl = document.getElementById('auth-user-name');
+  var logoutBtn = document.getElementById('logout-btn');
+  var sb = window.sbClient;
+  if (!guestEl || !userEl || !sb) return;
+
+  function render(session) {
+    var user = session && session.user;
+    if (user) {
+      guestEl.style.display = 'none';
+      userEl.style.display = '';
+      var meta = user.user_metadata || {};
+      nameEl.textContent = meta.name || user.email;
+    } else {
+      guestEl.style.display = '';
+      userEl.style.display = 'none';
+    }
   }
-  openBtn.addEventListener('click', function (e) { e.preventDefault(); setOpen(true); });
-  if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
-  if (backdrop) backdrop.addEventListener('click', function () { setOpen(false); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+
+  sb.auth.getSession().then(function (res) { render(res.data && res.data.session); });
+  sb.auth.onAuthStateChange(function (_event, session) { render(session); });
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      sb.auth.signOut();
+    });
+  }
+})();
+</script>
+<script>
+(function () {
+  function setupModal(openId, modalId, closeId, backdropId) {
+    var openEl = document.getElementById(openId);
+    var modal = document.getElementById(modalId);
+    var closeBtn = document.getElementById(closeId);
+    var backdrop = document.getElementById(backdropId);
+    if (!modal || !openEl) return;
+    function setOpen(open) {
+      modal.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    openEl.addEventListener('click', function (e) { e.preventDefault(); setOpen(true); });
+    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
+    if (backdrop) backdrop.addEventListener('click', function () { setOpen(false); });
+  }
+  setupModal('signup-open', 'signup-modal', 'signup-modal-close', 'signup-modal-backdrop');
+  setupModal('login-open', 'login-modal', 'login-modal-close', 'login-modal-backdrop');
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('#signup-modal.open, #login-modal.open').forEach(function (m) {
+      m.classList.remove('open');
+    });
+    document.body.style.overflow = '';
+  });
 })();
 </script>
 <script src="assets/site.js" defer></script>
