@@ -140,13 +140,13 @@
       graduatesGrid.innerHTML = data.graduates.map(function (gr) {
         return '<div style="overflow:hidden; border-radius:14px; border:1px solid var(--color-divider); background:#fff">' +
           '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(gr.photo, '졸업생 사진') + '</div>' +
-          '<div style="padding:14px 16px">' +
+          '<div style="padding:8px 10px">' +
           '<div style="display:flex; align-items:baseline; justify-content:space-between; gap:6px">' +
-          '<span style="font-size:16px; font-weight:700; color:#16233f">' + esc(gr.name) + '</span>' +
-          '<span style="font-family:\'Barlow Condensed\',sans-serif; font-size:13px; font-weight:700; color:#d1491f; white-space:nowrap">' + esc(gr.grad_year) + '년 졸업</span>' +
+          '<span style="font-size:14px; font-weight:700; color:#16233f">' + esc(gr.name) + '</span>' +
+          '<span style="font-family:\'Barlow Condensed\',sans-serif; font-size:12px; font-weight:700; color:#d1491f; white-space:nowrap">' + esc(gr.grad_year) + '년 졸업</span>' +
           '</div>' +
-          '<div style="font-size:13px; color:var(--color-neutral-700); margin-top:4px">' + esc(gr.destination) + '</div>' +
-          (gr.note ? '<p style="font-size:13px; color:var(--color-neutral-600); margin:8px 0 0; line-height:1.6">' + esc(gr.note) + '</p>' : '') +
+          '<div style="font-size:11px; color:var(--color-neutral-700); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">' + esc(gr.destination) + '</div>' +
+          (gr.note ? '<p style="font-size:11px; color:var(--color-neutral-600); margin:4px 0 0; line-height:1.5">' + esc(gr.note) + '</p>' : '') +
           '</div></div>';
       }).join('');
     }
