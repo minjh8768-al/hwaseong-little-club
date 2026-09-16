@@ -174,7 +174,7 @@
           '<span style="font-size:18px; font-weight:800; color:#16233f">' + esc(g.school) + '</span>' +
           '<span style="font-size:13px; color:var(--color-neutral-600)">' + g.items.length + '명</span>' +
           '</div>' +
-          '<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px">' +
+          '<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:14px">' +
           g.items.map(graduateCard).join('') +
           '</div></div>';
       }).join('');
