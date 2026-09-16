@@ -235,18 +235,18 @@
       var PENCIL_SVG = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px"><path d="m18 2 4 4-14 14H4v-4L18 2Z"/></svg>';
 
       var snsItems = [
-        { label: '인스타그램', url: sns.instagram, icon: INSTAGRAM_SVG },
-        { label: '네이버 밴드', url: sns.naver_band, icon: NAVER_SVG },
-        { label: '블로그', url: sns.blog, icon: PENCIL_SVG },
-        { label: '네이버 클립', url: sns.naver_clip, icon: NAVER_SVG }
+        { label: '인스타그램', url: sns.instagram, icon: INSTAGRAM_SVG, color: '#E1306C' },
+        { label: '네이버 밴드', url: sns.naver_band, icon: NAVER_SVG, color: '#03C75A' },
+        { label: '블로그', url: sns.blog, icon: PENCIL_SVG, color: '#16233f' },
+        { label: '네이버 클립', url: sns.naver_clip, icon: NAVER_SVG, color: '#03C75A' }
       ];
       snsGrid.innerHTML = snsItems.map(function (s) {
         if (s.url) {
           return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener" class="card blueprint" ' +
-            'style="padding:22px; text-align:center; text-decoration:none; color:#16233f; font-size:17px; font-weight:700">' +
+            'style="padding:22px; text-align:center; text-decoration:none; color:' + s.color + '; font-size:17px; font-weight:700">' +
             '<span style="margin-right:8px">' + s.icon + '</span>' + esc(s.label) + '</a>';
         }
-        return '<div class="card blueprint" style="padding:22px; text-align:center; color:var(--color-neutral-600); font-size:17px; font-weight:700">' +
+        return '<div class="card blueprint" style="padding:22px; text-align:center; color:' + s.color + '; opacity:.55; font-size:17px; font-weight:700">' +
           '<span style="margin-right:8px">' + s.icon + '</span>' + esc(s.label) + ' (준비중)</div>';
       }).join('');
     }
