@@ -149,7 +149,8 @@
   },
   "gallery": [
     {
-      "photo": "/hwaseong-little-club/assets/uploads/kakaotalk_20260911_141604694_03-1-.jpg"
+      "photo": "/hwaseong-little-club/assets/uploads/kakaotalk_20260911_141604694_03-1-.jpg",
+      "photo_position": "top"
     },
     {
       "photo": "/hwaseong-little-club/assets/uploads/kakaotalk_20260910_132600489_01.jpg"
