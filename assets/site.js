@@ -134,10 +134,27 @@
       }).join('');
     }
 
-    // Graduates (graduates.html)
+    // Graduates (graduates.html) — grouped by destination school, each
+    // group headed by that school's logo (from graduate_schools) if set.
     var graduatesGrid = document.getElementById('graduates-grid');
     if (graduatesGrid && Array.isArray(data.graduates)) {
-      graduatesGrid.innerHTML = data.graduates.map(function (gr) {
+      var schoolLogos = {};
+      (data.graduate_schools || []).forEach(function (s) {
+        if (s.name) schoolLogos[s.name] = s.logo;
+      });
+
+      var groups = [];
+      var groupBySchool = {};
+      data.graduates.forEach(function (gr) {
+        var school = gr.destination || '기타';
+        if (!groupBySchool[school]) {
+          groupBySchool[school] = { school: school, items: [] };
+          groups.push(groupBySchool[school]);
+        }
+        groupBySchool[school].items.push(gr);
+      });
+
+      function graduateCard(gr) {
         return '<div style="overflow:hidden; border-radius:14px; border:1px solid var(--color-divider); background:#fff">' +
           '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(gr.photo, '졸업생 사진') + '</div>' +
           '<div style="padding:8px 10px">' +
@@ -145,8 +162,20 @@
           '<span style="font-size:14px; font-weight:700; color:#16233f">' + esc(gr.name) + '</span>' +
           '<span style="font-family:\'Barlow Condensed\',sans-serif; font-size:12px; font-weight:700; color:#d1491f; white-space:nowrap">' + esc(gr.grad_year) + '년 졸업</span>' +
           '</div>' +
-          '<div style="font-size:11px; color:var(--color-neutral-700); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">' + esc(gr.destination) + '</div>' +
           (gr.note ? '<p style="font-size:11px; color:var(--color-neutral-600); margin:4px 0 0; line-height:1.5">' + esc(gr.note) + '</p>' : '') +
+          '</div></div>';
+      }
+
+      graduatesGrid.innerHTML = groups.map(function (g) {
+        var logo = schoolLogos[g.school];
+        return '<div>' +
+          '<div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:2px solid #16233f">' +
+          (logo ? '<img src="' + esc(assetUrl(logo)) + '" alt="" style="width:36px; height:36px; object-fit:contain">' : '') +
+          '<span style="font-size:18px; font-weight:800; color:#16233f">' + esc(g.school) + '</span>' +
+          '<span style="font-size:13px; color:var(--color-neutral-600)">' + g.items.length + '명</span>' +
+          '</div>' +
+          '<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px">' +
+          g.items.map(graduateCard).join('') +
           '</div></div>';
       }).join('');
     }

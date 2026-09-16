@@ -105,9 +105,17 @@ collections:
             fields:
               - { label: "이름", name: "name", widget: "string" }
               - { label: "졸업연도 (예: 2024)", name: "grad_year", widget: "string" }
-              - { label: "진학·진로 (예: 화성중학교 야구부 진학)", name: "destination", widget: "string" }
+              - { label: "진학 학교 (아래 '진학 학교 로고' 목록의 이름과 똑같이 입력하면 교표가 함께 표시됩니다)", name: "destination", widget: "string" }
               - { label: "한줄 소감 (선택)", name: "note", widget: "text", required: false }
               - { label: "사진", name: "photo", widget: "image", required: false }
+
+          - label: "진학 학교 로고"
+            name: "graduate_schools"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "학교 이름 (졸업생의 '진학 학교'와 똑같이)", name: "name", widget: "string" }
+              - { label: "학교 로고", name: "logo", widget: "image", required: false }
 
           - label: "공지 · 소식"
             name: "news"
