@@ -229,19 +229,19 @@
     var snsGrid = document.getElementById('sns-grid');
     if (snsGrid) {
       var snsItems = [
-        { label: '네이버 클립', url: sns.naver_clip },
-        { label: '네이버 밴드', url: sns.naver_band },
-        { label: '인스타그램', url: sns.instagram },
-        { label: '블로그', url: sns.blog }
+        { label: '네이버 클립', url: sns.naver_clip, icon: '🎬' },
+        { label: '네이버 밴드', url: sns.naver_band, icon: '👥' },
+        { label: '인스타그램', url: sns.instagram, icon: '📷' },
+        { label: '블로그', url: sns.blog, icon: '✏️' }
       ];
       snsGrid.innerHTML = snsItems.map(function (s) {
         if (s.url) {
           return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener" class="card blueprint" ' +
             'style="padding:22px; text-align:center; text-decoration:none; color:#16233f; font-size:17px; font-weight:700">' +
-            esc(s.label) + '</a>';
+            '<span style="margin-right:8px">' + s.icon + '</span>' + esc(s.label) + '</a>';
         }
         return '<div class="card blueprint" style="padding:22px; text-align:center; color:var(--color-neutral-600); font-size:17px; font-weight:700">' +
-          esc(s.label) + ' (준비중)</div>';
+          '<span style="margin-right:8px">' + s.icon + '</span>' + esc(s.label) + ' (준비중)</div>';
       }).join('');
     }
 
