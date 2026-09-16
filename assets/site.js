@@ -241,13 +241,14 @@
         { label: '네이버 클립', url: sns.naver_clip, icon: NAVER_SVG, color: '#03C75A' }
       ];
       snsGrid.innerHTML = snsItems.map(function (s) {
+        var iconSpan = '<span style="margin-right:8px; color:' + s.color + '">' + s.icon + '</span>';
         if (s.url) {
           return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener" class="card blueprint" ' +
-            'style="padding:22px; text-align:center; text-decoration:none; color:' + s.color + '; font-size:17px; font-weight:700">' +
-            '<span style="margin-right:8px">' + s.icon + '</span>' + esc(s.label) + '</a>';
+            'style="padding:22px; text-align:center; text-decoration:none; color:#16233f; font-size:17px; font-weight:700">' +
+            iconSpan + esc(s.label) + '</a>';
         }
-        return '<div class="card blueprint" style="padding:22px; text-align:center; color:' + s.color + '; opacity:.55; font-size:17px; font-weight:700">' +
-          '<span style="margin-right:8px">' + s.icon + '</span>' + esc(s.label) + ' (준비중)</div>';
+        return '<div class="card blueprint" style="padding:22px; text-align:center; color:var(--color-neutral-600); font-size:17px; font-weight:700">' +
+          iconSpan + esc(s.label) + ' (준비중)</div>';
       }).join('');
     }
 
