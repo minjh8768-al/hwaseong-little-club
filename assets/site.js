@@ -30,6 +30,13 @@
     return '<div class="ph" style="height:100%">' + esc(placeholderText) + '</div>';
   }
 
+  // CMS position field ("top"/"center"/"bottom") -> an object-position
+  // override, so the club can nudge which part of a photo stays visible
+  // when it's cropped into a fixed-aspect-ratio frame.
+  function positionStyle(pos) {
+    return ' object-position:' + esc(pos || 'center') + ';';
+  }
+
   function render(data) {
     // Hero
     var hero = data.hero || {};
@@ -44,7 +51,7 @@
         heroBg.innerHTML = '<video src="' + esc(assetUrl(hero.video)) + '" autoplay muted loop playsinline ' +
           'style="width:100%; height:100%; object-fit:cover"></video>';
       } else {
-        heroBg.innerHTML = photoOrPlaceholder(hero.image, '히어로 사진을 넣어주세요 (경기/훈련 사진)');
+        heroBg.innerHTML = photoOrPlaceholder(hero.image, '히어로 사진을 넣어주세요 (경기/훈련 사진)', positionStyle(hero.image_position));
       }
     }
     var statsWrap = document.getElementById('hero-stats');
@@ -61,7 +68,7 @@
     if (newsGrid && Array.isArray(data.news)) {
       newsGrid.innerHTML = data.news.map(function (n) {
         return '<article style="padding:0; overflow:hidden; border-radius:16px; border:1px solid var(--color-divider); background:#fff">' +
-          '<div style="height:170px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지') + '</div>' +
+          '<div style="height:170px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지', positionStyle(n.image_position)) + '</div>' +
           '<div style="padding:18px">' +
           '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
           '<h3 class="card-title" style="font-size:22px">' + esc(n.title) + '</h3>' +
@@ -84,7 +91,7 @@
     var about = data.about || {};
     setText('about-text', about.text);
     var aboutPhoto = document.getElementById('about-photo');
-    if (aboutPhoto) aboutPhoto.innerHTML = photoOrPlaceholder(about.photo, '팀 단체사진');
+    if (aboutPhoto) aboutPhoto.innerHTML = photoOrPlaceholder(about.photo, '팀 단체사진', positionStyle(about.photo_position));
     var aboutTiles = document.getElementById('about-tiles');
     if (aboutTiles) {
       var tileHeight = about.tile_height || 500;
@@ -114,7 +121,7 @@
     if (rosterGrid && Array.isArray(data.roster)) {
       rosterGrid.innerHTML = data.roster.map(function (p) {
         return '<div style="overflow:hidden; border-radius:14px; border:1px solid rgba(255,255,255,.18)">' +
-          '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(p.photo, '프로필 사진') + '</div>' +
+          '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(p.photo, '프로필 사진', positionStyle(p.photo_position)) + '</div>' +
           '<div style="background:#0f1932; padding:8px 10px">' +
           '<div style="display:flex; align-items:baseline; justify-content:space-between; gap:6px">' +
           '<span style="font-size:14px; font-weight:700; color:#fff">' + esc(p.name) + '</span>' +
@@ -131,7 +138,7 @@
       var galleryLink = (data.sns && data.sns.naver_band) || '';
       galleryGrid.innerHTML = data.gallery.map(function (g) {
         var tile = '<div style="aspect-ratio:4/3; border:1px solid var(--color-divider); overflow:hidden; border-radius:14px">' +
-          photoOrPlaceholder(g.photo, '사진') + '</div>';
+          photoOrPlaceholder(g.photo, '사진', positionStyle(g.photo_position)) + '</div>';
         return galleryLink
           ? '<a href="' + esc(galleryLink) + '" target="_blank" rel="noopener" style="display:block">' + tile + '</a>'
           : tile;
@@ -152,7 +159,7 @@
 
       function graduateCard(gr) {
         return '<div class="grad-card" style="flex:0 0 150px; overflow:hidden; border-radius:14px; border:1px solid var(--color-divider); background:#fff">' +
-          '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(gr.photo, '졸업생 사진') + '</div>' +
+          '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(gr.photo, '졸업생 사진', positionStyle(gr.photo_position)) + '</div>' +
           '<div style="padding:8px 10px">' +
           '<div style="display:flex; align-items:baseline; justify-content:space-between; gap:6px">' +
           '<span style="font-size:14px; font-weight:700; color:#16233f">' + esc(gr.name) + '</span>' +

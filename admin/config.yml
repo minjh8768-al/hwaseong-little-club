@@ -39,6 +39,14 @@ collections:
               - { label: "큰 제목 2번째 줄", name: "title_line2", widget: "string" }
               - { label: "소개 문구", name: "subtitle", widget: "text" }
               - { label: "배경 사진", name: "image", widget: "image", required: false, hint: "아래 배경 영상을 넣으면 이 사진 대신 영상이 재생됩니다." }
+              - label: "배경 사진 위치"
+                name: "image_position"
+                widget: "select"
+                default: "center"
+                options:
+                  - { label: "위", value: "top" }
+                  - { label: "가운데", value: "center" }
+                  - { label: "아래", value: "bottom" }
               - { label: "배경 영상 (선택, 사진보다 우선 재생됨)", name: "video", widget: "file", required: false, hint: "mp4 파일 권장. 너무 큰 파일(50MB 이상)은 업로드/로딩이 느려질 수 있어요." }
               - label: "통계 (창단/등록선수 등)"
                 name: "stats"
@@ -98,6 +106,14 @@ collections:
               - { label: "이름", name: "name", widget: "string" }
               - { label: "포지션 · 학년", name: "position", widget: "string" }
               - { label: "프로필 사진", name: "photo", widget: "image", required: false }
+              - label: "사진 위치"
+                name: "photo_position"
+                widget: "select"
+                default: "center"
+                options:
+                  - { label: "위", value: "top" }
+                  - { label: "가운데", value: "center" }
+                  - { label: "아래", value: "bottom" }
 
           - label: "졸업생 · 진로현황"
             name: "graduates"
@@ -109,6 +125,14 @@ collections:
               - { label: "진학 학교 (아래 '진학 학교 로고' 목록의 이름과 똑같이 입력하면 교표가 함께 표시됩니다)", name: "destination", widget: "string" }
               - { label: "한줄 소감 (선택)", name: "note", widget: "text", required: false }
               - { label: "사진", name: "photo", widget: "image", required: false }
+              - label: "사진 위치"
+                name: "photo_position"
+                widget: "select"
+                default: "center"
+                options:
+                  - { label: "위", value: "top" }
+                  - { label: "가운데", value: "center" }
+                  - { label: "아래", value: "bottom" }
 
           - label: "진학 학교 로고"
             name: "graduate_schools"
@@ -126,12 +150,28 @@ collections:
               - { label: "제목", name: "title", widget: "string" }
               - { label: "내용", name: "body", widget: "text" }
               - { label: "사진", name: "image", widget: "image", required: false }
+              - label: "사진 위치"
+                name: "image_position"
+                widget: "select"
+                default: "center"
+                options:
+                  - { label: "위", value: "top" }
+                  - { label: "가운데", value: "center" }
+                  - { label: "아래", value: "bottom" }
 
           - label: "갤러리"
             name: "gallery"
             widget: "list"
             fields:
               - { label: "사진", name: "photo", widget: "image", required: false }
+              - label: "사진 위치"
+                name: "photo_position"
+                widget: "select"
+                default: "center"
+                options:
+                  - { label: "위", value: "top" }
+                  - { label: "가운데", value: "center" }
+                  - { label: "아래", value: "bottom" }
 
           - label: "경기 일정"
             name: "schedule"
