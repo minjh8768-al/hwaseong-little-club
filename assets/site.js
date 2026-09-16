@@ -155,7 +155,7 @@
       });
 
       function graduateCard(gr) {
-        return '<div style="overflow:hidden; border-radius:14px; border:1px solid var(--color-divider); background:#fff">' +
+        return '<div class="grad-card" style="flex:0 0 150px; overflow:hidden; border-radius:14px; border:1px solid var(--color-divider); background:#fff">' +
           '<div style="aspect-ratio:3/4; position:relative">' + photoOrPlaceholder(gr.photo, '졸업생 사진') + '</div>' +
           '<div style="padding:8px 10px">' +
           '<div style="display:flex; align-items:baseline; justify-content:space-between; gap:6px">' +
@@ -168,13 +168,15 @@
 
       graduatesGrid.innerHTML = groups.map(function (g) {
         var logo = schoolLogos[g.school];
-        return '<div>' +
-          '<div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:2px solid #16233f">' +
-          (logo ? '<img src="' + esc(assetUrl(logo)) + '" alt="" style="width:36px; height:36px; object-fit:contain">' : '') +
-          '<span style="font-size:18px; font-weight:800; color:#16233f">' + esc(g.school) + '</span>' +
-          '<span style="font-size:13px; color:var(--color-neutral-600)">' + g.items.length + '명</span>' +
+        return '<div class="grad-section">' +
+          '<div style="display:flex; align-items:center; gap:14px; margin-bottom:18px">' +
+          '<span class="grad-logo-badge">' + (logo ? '<img src="' + esc(assetUrl(logo)) + '" alt="" style="width:36px; height:36px; object-fit:contain">' : '⚾') + '</span>' +
+          '<div>' +
+          '<div style="font-size:19px; font-weight:800; color:#16233f">' + esc(g.school) + '</div>' +
+          '<div style="font-size:12px; color:var(--color-neutral-600); letter-spacing:.04em">진학 · ' + g.items.length + '명</div>' +
           '</div>' +
-          '<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:14px">' +
+          '</div>' +
+          '<div style="display:flex; flex-wrap:wrap; gap:14px">' +
           g.items.map(graduateCard).join('') +
           '</div></div>';
       }).join('');
