@@ -63,18 +63,32 @@
       }).join('');
     }
 
-    // News
+    // News — homepage teaser (first 3, cards link to the full board) and
+    // the full board on news.html.
     var newsGrid = document.getElementById('news-grid');
     if (newsGrid && Array.isArray(data.news)) {
       newsGrid.innerHTML = data.news.map(function (n) {
-        return '<article style="padding:0; overflow:hidden; border-radius:16px; border:1px solid var(--color-divider); background:#fff">' +
+        return '<a href="news.html" style="display:block; padding:0; overflow:hidden; border-radius:16px; border:1px solid var(--color-divider); background:#fff; color:inherit; text-decoration:none">' +
           '<div style="height:170px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지', positionStyle(n.image_position)) + '</div>' +
           '<div style="padding:18px">' +
           '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
           '<h3 class="card-title" style="font-size:22px">' + esc(n.title) + '</h3>' +
           '<p class="card-body" style="margin:0">' + esc(n.body) + '</p>' +
-          '</div></article>';
+          '</div></a>';
       }).join('');
+    }
+
+    var newsBoard = document.getElementById('news-board');
+    if (newsBoard && Array.isArray(data.news)) {
+      newsBoard.innerHTML = data.news.length ? data.news.map(function (n) {
+        return '<article style="display:flex; gap:20px; padding:22px; background:#fff; flex-wrap:wrap">' +
+          '<div style="flex:none; width:160px; height:110px; border-radius:10px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지', positionStyle(n.image_position)) + '</div>' +
+          '<div style="flex:1; min-width:200px">' +
+          '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
+          '<h3 class="card-title" style="font-size:20px; margin:4px 0 8px">' + esc(n.title) + '</h3>' +
+          '<p class="card-body" style="margin:0">' + esc(n.body) + '</p>' +
+          '</div></article>';
+      }).join('') : '<p style="padding:22px; background:#fff; color:var(--color-neutral-600)">아직 등록된 공지·소식이 없어요.</p>';
     }
 
     // Schedule
