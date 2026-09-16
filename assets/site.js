@@ -185,6 +185,9 @@
     if (joinForm && join.email) {
       joinForm.setAttribute('data-notify-email', join.email);
     }
+    if (joinForm && join.team_join_code) {
+      joinForm.setAttribute('data-team-join-code', join.team_join_code);
+    }
     var applyForm = document.getElementById('apply-form');
     if (applyForm && join.email) {
       applyForm.setAttribute('data-notify-email', join.email);

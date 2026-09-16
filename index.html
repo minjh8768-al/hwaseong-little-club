@@ -566,8 +566,11 @@
   });
   updateRoleUI();
 
+  var defaultSuccessText = success.textContent;
+
   function hideAlerts() {
     success.style.display = 'none';
+    success.textContent = defaultSuccessText;
     pending.style.display = 'none';
     error.style.display = 'none';
   }
@@ -638,21 +641,46 @@
         return;
       }
 
-      var playerRow = {
-        parent_user_id: role === 'parent' ? user.id : null,
-        player_user_id: role === 'player' ? user.id : null,
-        name: playerName,
-        birth_year: birthYear,
-        school: null,
-        club_name: '화성서부리틀야구단',
-        sport: '야구',
-        position: null,
-        dominant_hand: null
-      };
+      var ownerColumn = role === 'parent' ? 'parent_user_id' : 'player_user_id';
 
-      return sb.from('players').insert(playerRow).then(function (insertRes) {
-        if (insertRes.error) { showError('계정은 만들어졌지만 선수 등록에 실패했어요: ' + insertRes.error.message); return; }
-        afterInsert();
+      // A players row for this account may already exist (e.g. the player
+      // signed up on PLAYLOG directly first) — check before inserting so we
+      // never create a duplicate profile for the same person.
+      return sb.from('players').select('id, name').eq(ownerColumn, user.id).maybeSingle().then(function (existingRes) {
+        if (existingRes.error) { showError('확인 중 문제가 발생했어요: ' + existingRes.error.message); return; }
+
+        if (existingRes.data) {
+          success.textContent = '✓ 이미 등록된 선수(' + existingRes.data.name + ')가 있어요. 같은 이메일/비밀번호로 PLAYLOG에 로그인하시면 계속 확인하실 수 있습니다.';
+          afterInsert();
+          return;
+        }
+
+        var teamJoinCode = form.getAttribute('data-team-join-code');
+        var teamLookup = teamJoinCode
+          ? sb.rpc('find_team_by_join_code', { code: teamJoinCode })
+          : Promise.resolve({ data: [] });
+
+        return teamLookup.then(function (teamRes) {
+          var teamId = (teamRes.data && teamRes.data[0] && teamRes.data[0].id) || null;
+
+          var playerRow = {
+            parent_user_id: role === 'parent' ? user.id : null,
+            player_user_id: role === 'player' ? user.id : null,
+            team_id: teamId,
+            name: playerName,
+            birth_year: birthYear,
+            school: null,
+            club_name: '화성서부리틀야구단',
+            sport: '야구',
+            position: null,
+            dominant_hand: null
+          };
+
+          return sb.from('players').insert(playerRow).then(function (insertRes) {
+            if (insertRes.error) { showError('계정은 만들어졌지만 선수 등록에 실패했어요: ' + insertRes.error.message); return; }
+            afterInsert();
+          });
+        });
       });
     }).catch(function (err) {
       showError(err && err.message);
