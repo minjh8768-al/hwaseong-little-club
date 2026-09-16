@@ -190,6 +190,7 @@
         </span>
         <span id="auth-user" style="display:none">
           <span id="auth-user-name" style="color:#16233f; font-weight:700"></span>님
+          <span id="auth-user-role" style="color:var(--color-neutral-700)"></span>
           <span aria-hidden="true">|</span>
           <a href="https://littleball-growth.vercel.app/players" target="_blank" rel="noopener" class="playlog-link" style="color:#d1491f; font-weight:700">PLAYLOG</a>
           <span aria-hidden="true">|</span>
@@ -686,6 +687,12 @@
       }
       success.style.display = 'flex';
       form.reset();
+      var loginModal = document.getElementById('login-modal');
+      setTimeout(function () {
+        if (loginModal) loginModal.classList.remove('open');
+        document.body.style.overflow = '';
+        success.style.display = 'none';
+      }, 1100);
     }).catch(function () {
       error.textContent = '문제가 발생했습니다. 잠시 후 다시 시도해 주세요.';
       error.style.display = 'flex';
@@ -703,9 +710,12 @@
   var guestEl = document.getElementById('auth-guest');
   var userEl = document.getElementById('auth-user');
   var nameEl = document.getElementById('auth-user-name');
+  var roleEl = document.getElementById('auth-user-role');
   var logoutBtn = document.getElementById('logout-btn');
   var sb = window.sbClient;
   if (!guestEl || !userEl || !sb) return;
+
+  var ROLE_LABELS = { parent: '학부모', player: '선수', coach: '코치' };
 
   // PLAYLOG lives on a different origin, so it keeps its own separate
   // login session — logging in here doesn't touch it. To avoid PLAYLOG
@@ -732,6 +742,10 @@
       userEl.style.display = '';
       var meta = user.user_metadata || {};
       nameEl.textContent = meta.name || user.email;
+      if (roleEl) {
+        var roleLabel = ROLE_LABELS[meta.role];
+        roleEl.textContent = roleLabel ? '(' + roleLabel + ')' : '';
+      }
     } else {
       guestEl.style.display = '';
       userEl.style.display = 'none';
