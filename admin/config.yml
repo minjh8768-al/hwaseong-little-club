@@ -161,3 +161,5 @@ collections:
               - { label: "전화번호", name: "phone", widget: "string" }
               - { label: "이메일 (입단 신청서가 이 주소로 전송됩니다)", name: "email", widget: "string" }
               - { label: "PLAYLOG 팀 참가 코드 (회원가입 시 선수를 이 팀에 자동 연결)", name: "team_join_code", widget: "string", required: false }
+              - { label: "선수 회원가입 코드 (선수 본인 가입 시 이 코드를 입력해야 가입됨)", name: "player_signup_code", widget: "string" }
+              - { label: "학부모 회원가입 코드 (학부모 가입 시 이 코드를 입력해야 가입됨)", name: "parent_signup_code", widget: "string" }

@@ -436,6 +436,10 @@
             <div class="jf-field" id="join-player-name-field"><label class="jf-label">선수(자녀) 이름</label><input class="jf-input" name="player_name" placeholder="홍길동" required></div>
             <div class="jf-field"><label class="jf-label">출생연도</label><input class="jf-input" type="number" name="birth_year" placeholder="2015" min="2005" max="2022" required></div>
           </div>
+          <div class="jf-field" id="join-signup-code-field">
+            <label class="jf-label" id="join-signup-code-label">가입 코드</label>
+            <input class="jf-input" name="signup_code" placeholder="클럽에서 안내받은 코드를 입력하세요" required>
+          </div>
           <p id="join-coach-note" class="jf-alert" style="display:none; background:#eef2fa; color:#16233f">코치로 가입하면 계정이 먼저 만들어지고, 이후 PLAYLOG에서 팀을 만들거나 코치 코드로 참여할 수 있어요.</p>
           <button type="submit" class="jf-submit"><span class="jf-submit-label">회원가입</span> <span aria-hidden="true">→</span></button>
           <div id="join-success" class="jf-alert jf-alert-success">✓ 가입이 완료됐습니다. PLAYLOG 계정도 함께 만들어졌어요 — 같은 이메일/비밀번호로 로그인하실 수 있습니다.</div>
@@ -539,6 +543,10 @@
   var playerNameInput = form.querySelector('[name="player_name"]');
   var birthYearInput = form.querySelector('[name="birth_year"]');
   var roleLabels = { parent: '보호자 성함', player: '선수 본인 이름', coach: '코치 성함' };
+  var signupCodeField = document.getElementById('join-signup-code-field');
+  var signupCodeLabel = document.getElementById('join-signup-code-label');
+  var signupCodeInput = form.querySelector('[name="signup_code"]');
+  var signupCodeLabels = { parent: '학부모 가입 코드', player: '선수 가입 코드' };
 
   function currentRole() {
     var checked = form.querySelector('input[name="role"]:checked');
@@ -553,12 +561,17 @@
       coachNote.style.display = 'block';
       playerNameInput.required = false;
       birthYearInput.required = false;
+      signupCodeField.style.display = 'none';
+      signupCodeInput.required = false;
     } else {
       playerFields.style.display = 'grid';
       coachNote.style.display = 'none';
       playerNameField.style.display = (role === 'player') ? 'none' : '';
       playerNameInput.required = (role === 'parent');
       birthYearInput.required = true;
+      signupCodeField.style.display = '';
+      signupCodeLabel.textContent = signupCodeLabels[role];
+      signupCodeInput.required = true;
     }
   }
   form.querySelectorAll('input[name="role"]').forEach(function (r) {
@@ -592,6 +605,19 @@
     var password = form.querySelector('[name="password"]').value;
     var playerName = (role === 'player') ? name : playerNameInput.value.trim();
     var birthYear = (role === 'coach') ? null : parseInt(birthYearInput.value, 10);
+
+    if (role !== 'coach') {
+      var expectedCode = role === 'player'
+        ? form.getAttribute('data-player-signup-code')
+        : form.getAttribute('data-parent-signup-code');
+      var enteredCode = signupCodeInput.value.trim();
+      if (!expectedCode || enteredCode !== expectedCode) {
+        showError('가입 코드가 올바르지 않습니다. 클럽에서 안내받은 코드를 확인해 주세요.');
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitLabel) submitLabel.textContent = '회원가입';
+        return;
+      }
+    }
 
     sb.auth.signUp({
       email: email,

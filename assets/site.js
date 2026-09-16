@@ -188,6 +188,12 @@
     if (joinForm && join.team_join_code) {
       joinForm.setAttribute('data-team-join-code', join.team_join_code);
     }
+    if (joinForm && join.player_signup_code) {
+      joinForm.setAttribute('data-player-signup-code', join.player_signup_code);
+    }
+    if (joinForm && join.parent_signup_code) {
+      joinForm.setAttribute('data-parent-signup-code', join.parent_signup_code);
+    }
     var applyForm = document.getElementById('apply-form');
     if (applyForm && join.email) {
       applyForm.setAttribute('data-notify-email', join.email);
