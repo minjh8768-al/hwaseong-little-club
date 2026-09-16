@@ -195,38 +195,31 @@
           : '<p style="color:var(--color-neutral-600)">아직 등록된 졸업생이 없어요.</p>';
       }
 
-      var generations = [];
-      data.graduates.forEach(function (gr) {
-        var g = gr.generation || '';
-        if (g && generations.indexOf(g) === -1) generations.push(g);
-      });
-      generations.sort(function (a, b) { return Number(b) - Number(a); });
+      // 7기~1기 버튼은 실제 데이터가 아직 없는 기수도 항상 보여준다 —
+      // 나중에 어드민에서 채워 넣기 전까지는 그냥 "아직 없어요"로 표시됨.
+      var GENERATIONS = ['7', '6', '5', '4', '3', '2', '1'];
 
-      if (graduatesGenFilter && generations.length > 1) {
-        var buttons = generations.map(function (g) { return { value: g, label: g + '기' }; });
-        buttons.push({ value: 'all', label: '전체' });
-
+      if (graduatesGenFilter) {
         function setActive(value) {
           graduatesGenFilter.querySelectorAll('button').forEach(function (btn) {
             var active = btn.getAttribute('data-gen') === value;
             btn.style.background = active ? '#16233f' : '#fff';
             btn.style.color = active ? '#fff' : '#16233f';
           });
-          var filtered = value === 'all' ? data.graduates : data.graduates.filter(function (gr) { return gr.generation === value; });
+          var filtered = data.graduates.filter(function (gr) { return gr.generation === value; });
           renderGraduates(filtered);
         }
 
-        graduatesGenFilter.innerHTML = buttons.map(function (b) {
-          return '<button type="button" data-gen="' + esc(b.value) + '" style="padding:8px 16px; border-radius:999px; border:1.5px solid #16233f; background:#fff; color:#16233f; font-size:13px; font-weight:700; cursor:pointer">' + esc(b.label) + '</button>';
+        graduatesGenFilter.innerHTML = GENERATIONS.map(function (g) {
+          return '<button type="button" data-gen="' + esc(g) + '" style="padding:8px 16px; border-radius:999px; border:1.5px solid #16233f; background:#fff; color:#16233f; font-size:13px; font-weight:700; cursor:pointer">' + esc(g) + '기</button>';
         }).join('');
 
         graduatesGenFilter.querySelectorAll('button').forEach(function (btn) {
           btn.addEventListener('click', function () { setActive(btn.getAttribute('data-gen')); });
         });
 
-        setActive(generations[0]);
+        setActive(GENERATIONS[0]);
       } else {
-        if (graduatesGenFilter) graduatesGenFilter.innerHTML = '';
         renderGraduates(data.graduates);
       }
     }
