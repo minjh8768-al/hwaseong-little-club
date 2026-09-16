@@ -78,11 +78,11 @@
       </div>
       <div class="wf-field"><label class="wf-label">제목</label><input class="wf-input" name="title" required></div>
       <div class="wf-field"><label class="wf-label">내용</label><textarea class="wf-input" name="body" required></textarea></div>
+      <div class="wf-field"><label class="wf-label">사진 (선택)</label><input class="wf-input" type="file" name="photo" accept="image/*"></div>
       <button type="submit" class="wf-submit"><span id="post-submit-label">등록하기</span></button>
       <div id="post-success" class="wf-alert wf-alert-success">✓ 등록됐습니다. 1~2분 뒤 사이트에 반영돼요.</div>
       <div id="post-error" class="wf-alert wf-alert-error"></div>
     </form>
-    <p style="font-size:12px; color:var(--color-neutral-600); margin-top:14px">사진을 함께 올리고 싶으면 전체 관리자(<a href="admin/">/admin</a>)에서 등록해 주세요.</p>
   </section>
 
   <footer style="background:#0f1932; color:#9fb3cf">
@@ -166,28 +166,58 @@
     var category = postForm.querySelector('[name="category"]').value;
     var title = postForm.querySelector('[name="title"]').value.trim();
     var body = postForm.querySelector('[name="body"]').value.trim();
+    var photoFile = postForm.querySelector('[name="photo"]').files[0];
     var today = new Date();
     var dateStr = today.getFullYear() + '.' + String(today.getMonth() + 1).padStart(2, '0') + '.' + String(today.getDate()).padStart(2, '0');
     var dateLabel = category + ' · ' + dateStr;
 
-    fetch(API_BASE, { headers: { Authorization: 'token ' + token } })
-      .then(function (res) {
-        if (!res.ok) throw new Error('기존 내용을 불러오지 못했어요 (로그인이 만료됐을 수 있어요)');
-        return res.json();
-      })
-      .then(function (fileData) {
-        var content = JSON.parse(b64DecodeUnicode(fileData.content));
-        content.news = content.news || [];
-        content.news.unshift({ date_label: dateLabel, title: title, body: body, image: '' });
+    function readFileAsBase64(file) {
+      return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          // reader.result is "data:<mime>;base64,<data>" — keep just the data.
+          resolve(reader.result.split(',')[1]);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
 
-        return fetch(API_BASE, {
+    function uploadPhoto() {
+      if (!photoFile) return Promise.resolve('');
+      var safeName = photoFile.name.replace(/[^a-zA-Z0-9.\-_가-힣]/g, '_');
+      var uploadPath = 'assets/uploads/' + Date.now() + '-' + safeName;
+      return readFileAsBase64(photoFile).then(function (base64) {
+        return fetch('https://api.github.com/repos/' + REPO + '/contents/' + uploadPath, {
           method: 'PUT',
           headers: { Authorization: 'token ' + token, 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            message: '공지 추가: ' + title,
-            content: b64EncodeUnicode(JSON.stringify(content, null, 2) + '\n'),
-            sha: fileData.sha
-          })
+          body: JSON.stringify({ message: '공지 사진 업로드: ' + title, content: base64 })
+        }).then(function (res) {
+          if (!res.ok) return res.json().then(function (err) { throw new Error(err.message || '사진 업로드에 실패했어요'); });
+          return '/hwaseong-little-club/' + uploadPath;
+        });
+      });
+    }
+
+    uploadPhoto()
+      .then(function (imagePath) {
+        return fetch(API_BASE, { headers: { Authorization: 'token ' + token } }).then(function (res) {
+          if (!res.ok) throw new Error('기존 내용을 불러오지 못했어요 (로그인이 만료됐을 수 있어요)');
+          return res.json();
+        }).then(function (fileData) {
+          var content = JSON.parse(b64DecodeUnicode(fileData.content));
+          content.news = content.news || [];
+          content.news.unshift({ date_label: dateLabel, title: title, body: body, image: imagePath });
+
+          return fetch(API_BASE, {
+            method: 'PUT',
+            headers: { Authorization: 'token ' + token, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message: '공지 추가: ' + title,
+              content: b64EncodeUnicode(JSON.stringify(content, null, 2) + '\n'),
+              sha: fileData.sha
+            })
+          });
         });
       })
       .then(function (putRes) {
