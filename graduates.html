@@ -23,6 +23,7 @@
   }
 
   .grad-section {
+    flex: 0 1 auto;
     background: linear-gradient(180deg, #f7f8fa 0%, #fff 220px);
     border: 1px solid var(--color-divider);
     border-radius: 20px;
@@ -63,7 +64,7 @@
     <h1 style="font-size:38px; margin:6px 0 12px">졸업생 · 진로현황</h1>
     <p style="font-size:16px; color:var(--color-neutral-700); line-height:1.8; max-width:640px; margin:0 0 40px">화성시 서부리틀야구단을 거쳐간 선수들이 지금 어디에서 야구를 이어가고 있는지 소개합니다.</p>
 
-    <div id="graduates-grid" style="display:grid; gap:32px"></div>
+    <div id="graduates-grid" style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px"></div>
   </section>
 
   <footer style="background:#0f1932; color:#9fb3cf">
