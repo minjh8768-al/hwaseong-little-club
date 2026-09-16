@@ -136,22 +136,14 @@
 
     // Graduates (graduates.html) — grouped by destination school, each
     // group headed by that school's logo (from graduate_schools) if set.
+    // A 기수(generation) filter row lets the club add older classes over
+    // time without the page growing into one endless list.
     var graduatesGrid = document.getElementById('graduates-grid');
+    var graduatesGenFilter = document.getElementById('graduates-gen-filter');
     if (graduatesGrid && Array.isArray(data.graduates)) {
       var schoolLogos = {};
       (data.graduate_schools || []).forEach(function (s) {
         if (s.name) schoolLogos[s.name] = s.logo;
-      });
-
-      var groups = [];
-      var groupBySchool = {};
-      data.graduates.forEach(function (gr) {
-        var school = gr.destination || '기타';
-        if (!groupBySchool[school]) {
-          groupBySchool[school] = { school: school, items: [] };
-          groups.push(groupBySchool[school]);
-        }
-        groupBySchool[school].items.push(gr);
       });
 
       function graduateCard(gr) {
@@ -181,13 +173,62 @@
           '</div></div>';
       }
 
-      // 요청에 따라 첫 두 학교(가장 인원 많은 학교들)는 한 줄, 나머지는 그 다음 줄에.
-      var firstRow = groups.slice(0, 2);
-      var restRow = groups.slice(2);
-      var rowStyle = 'display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px';
-      graduatesGrid.innerHTML =
-        '<div style="' + rowStyle + '">' + firstRow.map(graduateSection).join('') + '</div>' +
-        (restRow.length ? '<div style="' + rowStyle + '">' + restRow.map(graduateSection).join('') + '</div>' : '');
+      function renderGraduates(list) {
+        var groups = [];
+        var groupBySchool = {};
+        list.forEach(function (gr) {
+          var school = gr.destination || '기타';
+          if (!groupBySchool[school]) {
+            groupBySchool[school] = { school: school, items: [] };
+            groups.push(groupBySchool[school]);
+          }
+          groupBySchool[school].items.push(gr);
+        });
+
+        // 가장 인원 많은(먼저 나오는) 학교 둘은 한 줄, 나머지는 그 다음 줄에.
+        var firstRow = groups.slice(0, 2);
+        var restRow = groups.slice(2);
+        var rowStyle = 'display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px';
+        graduatesGrid.innerHTML = groups.length
+          ? '<div style="' + rowStyle + '">' + firstRow.map(graduateSection).join('') + '</div>' +
+            (restRow.length ? '<div style="' + rowStyle + '">' + restRow.map(graduateSection).join('') + '</div>' : '')
+          : '<p style="color:var(--color-neutral-600)">아직 등록된 졸업생이 없어요.</p>';
+      }
+
+      var generations = [];
+      data.graduates.forEach(function (gr) {
+        var g = gr.generation || '';
+        if (g && generations.indexOf(g) === -1) generations.push(g);
+      });
+      generations.sort(function (a, b) { return Number(b) - Number(a); });
+
+      if (graduatesGenFilter && generations.length > 1) {
+        var buttons = generations.map(function (g) { return { value: g, label: g + '기' }; });
+        buttons.push({ value: 'all', label: '전체' });
+
+        function setActive(value) {
+          graduatesGenFilter.querySelectorAll('button').forEach(function (btn) {
+            var active = btn.getAttribute('data-gen') === value;
+            btn.style.background = active ? '#16233f' : '#fff';
+            btn.style.color = active ? '#fff' : '#16233f';
+          });
+          var filtered = value === 'all' ? data.graduates : data.graduates.filter(function (gr) { return gr.generation === value; });
+          renderGraduates(filtered);
+        }
+
+        graduatesGenFilter.innerHTML = buttons.map(function (b) {
+          return '<button type="button" data-gen="' + esc(b.value) + '" style="padding:8px 16px; border-radius:999px; border:1.5px solid #16233f; background:#fff; color:#16233f; font-size:13px; font-weight:700; cursor:pointer">' + esc(b.label) + '</button>';
+        }).join('');
+
+        graduatesGenFilter.querySelectorAll('button').forEach(function (btn) {
+          btn.addEventListener('click', function () { setActive(btn.getAttribute('data-gen')); });
+        });
+
+        setActive(generations[0]);
+      } else {
+        if (graduatesGenFilter) graduatesGenFilter.innerHTML = '';
+        renderGraduates(data.graduates);
+      }
     }
 
     // SNS

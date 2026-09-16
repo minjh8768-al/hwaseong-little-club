@@ -104,6 +104,7 @@ collections:
             widget: "list"
             fields:
               - { label: "이름", name: "name", widget: "string" }
+              - { label: "기수 (예: 7)", name: "generation", widget: "string" }
               - { label: "졸업연도 (예: 2024)", name: "grad_year", widget: "string" }
               - { label: "진학 학교 (아래 '진학 학교 로고' 목록의 이름과 똑같이 입력하면 교표가 함께 표시됩니다)", name: "destination", widget: "string" }
               - { label: "한줄 소감 (선택)", name: "note", widget: "text", required: false }
