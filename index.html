@@ -626,6 +626,13 @@
           fd.append('_captcha', 'false');
           fetch('https://formsubmit.co/' + notifyEmail, { method: 'POST', body: fd }).catch(function () {});
         }
+
+        var signupModal = document.getElementById('signup-modal');
+        setTimeout(function () {
+          if (signupModal) signupModal.classList.remove('open');
+          document.body.style.overflow = '';
+          success.style.display = 'none';
+        }, 1100);
       };
 
       if (role === 'coach') {
