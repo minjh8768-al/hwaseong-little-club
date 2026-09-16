@@ -63,13 +63,13 @@
       }).join('');
     }
 
-    // News — homepage teaser (latest 4, cards link to the full board) and
+    // News — homepage teaser (latest 3, cards link to the full board) and
     // the full board on news.html.
     var newsGrid = document.getElementById('news-grid');
     if (newsGrid && Array.isArray(data.news)) {
-      newsGrid.innerHTML = data.news.slice(0, 4).map(function (n) {
+      newsGrid.innerHTML = data.news.slice(0, 3).map(function (n) {
         return '<a href="news.html" style="display:block; padding:0; overflow:hidden; border-radius:16px; border:1px solid var(--color-divider); background:#fff; color:inherit; text-decoration:none">' +
-          '<div style="height:170px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지', positionStyle(n.image_position)) + '</div>' +
+          '<div style="height:260px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지', positionStyle(n.image_position)) + '</div>' +
           '<div style="padding:18px">' +
           '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
           '<h3 class="card-title" style="font-size:22px">' + esc(n.title) + '</h3>' +
