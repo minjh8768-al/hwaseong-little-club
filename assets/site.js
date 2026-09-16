@@ -166,7 +166,7 @@
           '</div></div>';
       }
 
-      graduatesGrid.innerHTML = groups.map(function (g) {
+      function graduateSection(g) {
         var logo = schoolLogos[g.school];
         return '<div class="grad-section">' +
           '<div style="display:flex; align-items:center; gap:14px; margin-bottom:18px">' +
@@ -179,7 +179,15 @@
           '<div style="display:flex; flex-wrap:wrap; gap:14px">' +
           g.items.map(graduateCard).join('') +
           '</div></div>';
-      }).join('');
+      }
+
+      // 요청에 따라 첫 두 학교(가장 인원 많은 학교들)는 한 줄, 나머지는 그 다음 줄에.
+      var firstRow = groups.slice(0, 2);
+      var restRow = groups.slice(2);
+      var rowStyle = 'display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px';
+      graduatesGrid.innerHTML =
+        '<div style="' + rowStyle + '">' + firstRow.map(graduateSection).join('') + '</div>' +
+        (restRow.length ? '<div style="' + rowStyle + '">' + restRow.map(graduateSection).join('') + '</div>' : '');
     }
 
     // SNS
