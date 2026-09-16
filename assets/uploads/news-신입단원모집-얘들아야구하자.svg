@@ -1,0 +1,43 @@
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16233f"/>
+      <stop offset="100%" stop-color="#0a1226"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- diagonal orange accent -->
+  <polygon points="800,0 800,450 560,450" fill="#d1491f" opacity="0.12"/>
+  <polygon points="800,0 800,190 640,0" fill="#d1491f"/>
+
+  <!-- baseball -->
+  <g transform="translate(660,340)">
+    <circle r="76" fill="#f7f8fa"/>
+    <circle r="76" fill="none" stroke="#16233f" stroke-width="2" opacity="0.15"/>
+    <path d="M -40,-58 Q 4,0 -40,58" fill="none" stroke="#d1491f" stroke-width="4"/>
+    <path d="M 40,-58 Q -4,0 40,58" fill="none" stroke="#d1491f" stroke-width="4"/>
+    <g stroke="#d1491f" stroke-width="3">
+      <line x1="-38" y1="-46" x2="-28" y2="-42"/>
+      <line x1="-42" y1="-24" x2="-31" y2="-22"/>
+      <line x1="-44" y1="0" x2="-32" y2="0"/>
+      <line x1="-42" y1="24" x2="-31" y2="22"/>
+      <line x1="-38" y1="46" x2="-28" y2="42"/>
+      <line x1="38" y1="-46" x2="28" y2="-42"/>
+      <line x1="42" y1="-24" x2="31" y2="-22"/>
+      <line x1="44" y1="0" x2="32" y2="0"/>
+      <line x1="42" y1="24" x2="31" y2="22"/>
+      <line x1="38" y1="46" x2="28" y2="42"/>
+    </g>
+  </g>
+
+  <text x="56" y="86" font-family="Georgia, 'Noto Sans KR', sans-serif" font-size="20" font-weight="700" fill="#d1491f" letter-spacing="3">SINCE 2020 · HWASEONG CITY</text>
+
+  <text x="54" y="196" font-family="Georgia, 'Noto Sans KR', sans-serif" font-size="88" font-weight="800" fill="#ffffff">얘들아!</text>
+  <text x="54" y="286" font-family="Georgia, 'Noto Sans KR', sans-serif" font-size="88" font-weight="800" fill="#ffffff">야구하자!</text>
+
+  <rect x="54" y="322" width="86" height="6" fill="#d1491f"/>
+  <text x="54" y="366" font-family="'Noto Sans KR', sans-serif" font-size="24" font-weight="700" fill="#cfd9e6">2026 하반기 신입단원 모집</text>
+  <text x="54" y="398" font-family="'Noto Sans KR', sans-serif" font-size="18" fill="#9fb3cf">화성시 서부리틀야구단 · 초등 1~6학년</text>
+</svg>
