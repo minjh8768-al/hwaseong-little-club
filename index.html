@@ -194,6 +194,8 @@
           <span aria-hidden="true">|</span>
           <a href="https://littleball-growth.vercel.app/players" target="_blank" rel="noopener" class="playlog-link" style="color:#d1491f; font-weight:700">PLAYLOG</a>
           <span aria-hidden="true">|</span>
+          <a href="https://littleball-growth.vercel.app/settings/account" target="_blank" rel="noopener" class="playlog-link" data-playlog-path="/settings/account" style="color:var(--color-neutral-700)">계정 설정</a>
+          <span aria-hidden="true">|</span>
           <a href="#" id="logout-btn" style="color:var(--color-neutral-700)">로그아웃</a>
         </span>
       </div>
@@ -723,16 +725,19 @@
   // current session over via a one-time bridge link: the tokens travel
   // in the URL fragment (never sent to any server) and PLAYLOG's
   // /auth/bridge page swaps them in before landing on /players.
-  var PLAYLOG_PLAYERS_URL = 'https://littleball-growth.vercel.app/players';
   var PLAYLOG_BRIDGE_URL = 'https://littleball-growth.vercel.app/auth/bridge';
 
   function updatePlaylogLinks(session) {
-    var href = PLAYLOG_PLAYERS_URL;
-    if (session && session.access_token && session.refresh_token) {
-      href = PLAYLOG_BRIDGE_URL + '#access_token=' + encodeURIComponent(session.access_token) +
-        '&refresh_token=' + encodeURIComponent(session.refresh_token);
-    }
-    document.querySelectorAll('.playlog-link').forEach(function (a) { a.href = href; });
+    document.querySelectorAll('.playlog-link').forEach(function (a) {
+      var path = a.getAttribute('data-playlog-path') || '/players';
+      if (session && session.access_token && session.refresh_token) {
+        a.href = PLAYLOG_BRIDGE_URL + '#access_token=' + encodeURIComponent(session.access_token) +
+          '&refresh_token=' + encodeURIComponent(session.refresh_token) +
+          '&next=' + encodeURIComponent(path);
+      } else {
+        a.href = 'https://littleball-growth.vercel.app' + path;
+      }
+    });
   }
 
   function render(session) {
