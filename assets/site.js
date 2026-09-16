@@ -125,12 +125,16 @@
       }).join('');
     }
 
-    // Gallery
+    // Gallery — each photo links out to the club's Naver Band, if set.
     var galleryGrid = document.getElementById('gallery-grid');
     if (galleryGrid && Array.isArray(data.gallery)) {
+      var galleryLink = (data.sns && data.sns.naver_band) || '';
       galleryGrid.innerHTML = data.gallery.map(function (g) {
-        return '<div style="aspect-ratio:4/3; border:1px solid var(--color-divider); overflow:hidden; border-radius:14px">' +
+        var tile = '<div style="aspect-ratio:4/3; border:1px solid var(--color-divider); overflow:hidden; border-radius:14px">' +
           photoOrPlaceholder(g.photo, '사진') + '</div>';
+        return galleryLink
+          ? '<a href="' + esc(galleryLink) + '" target="_blank" rel="noopener" style="display:block">' + tile + '</a>'
+          : tile;
       }).join('');
     }
 
