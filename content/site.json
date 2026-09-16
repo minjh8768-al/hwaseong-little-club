@@ -148,24 +148,17 @@
       "note": ""
     },
     {
-      "photo": "assets/uploads/graduate-고여준.jpg",
-      "name": "고여준",
-      "grad_year": "2026",
-      "destination": "화성정남중",
-      "note": ""
-    },
-    {
-      "photo": "assets/uploads/graduate-송민제.jpg",
-      "name": "송민제",
-      "grad_year": "2026",
-      "destination": "이천모가중",
-      "note": ""
-    },
-    {
       "photo": "assets/uploads/graduate-김강민.jpg",
       "name": "김강민",
       "grad_year": "2026",
       "destination": "안산중앙중",
+      "note": ""
+    },
+    {
+      "photo": "assets/uploads/graduate-고여준.jpg",
+      "name": "고여준",
+      "grad_year": "2026",
+      "destination": "화성정남중",
       "note": ""
     },
     {
@@ -180,6 +173,13 @@
       "name": "이강민",
       "grad_year": "2026",
       "destination": "화성정남중",
+      "note": ""
+    },
+    {
+      "photo": "assets/uploads/graduate-송민제.jpg",
+      "name": "송민제",
+      "grad_year": "2026",
+      "destination": "이천모가중",
       "note": ""
     },
     {
