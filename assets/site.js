@@ -67,8 +67,8 @@
     // the full board on news.html.
     var newsGrid = document.getElementById('news-grid');
     if (newsGrid && Array.isArray(data.news)) {
-      newsGrid.innerHTML = data.news.slice(0, 3).map(function (n) {
-        return '<a href="news.html" style="display:block; padding:0; overflow:hidden; border-radius:16px; border:1px solid var(--color-divider); background:#fff; color:inherit; text-decoration:none">' +
+      newsGrid.innerHTML = data.news.slice(0, 3).map(function (n, i) {
+        return '<a href="news.html?post=' + i + '" style="display:block; padding:0; overflow:hidden; border-radius:16px; border:1px solid var(--color-divider); background:#fff; color:inherit; text-decoration:none">' +
           '<div style="height:260px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지', positionStyle(n.image_position)) + '</div>' +
           '<div style="padding:18px">' +
           '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
@@ -78,17 +78,40 @@
       }).join('');
     }
 
+    // news.html: a clean title-only list by default; clicking a title
+    // switches (via ?post=<index>) to that one post shown in full, photo
+    // and all — instead of dumping every post's full body on one page.
     var newsBoard = document.getElementById('news-board');
+    var newsDetailNav = document.getElementById('news-detail-nav');
     if (newsBoard && Array.isArray(data.news)) {
-      newsBoard.innerHTML = data.news.length ? data.news.map(function (n) {
-        return '<article style="display:flex; gap:20px; padding:22px; background:#fff; flex-wrap:wrap">' +
-          '<div style="flex:none; width:160px; height:110px; border-radius:10px; overflow:hidden">' + photoOrPlaceholder(n.image, '소식 이미지', positionStyle(n.image_position)) + '</div>' +
-          '<div style="flex:1; min-width:200px">' +
-          '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
-          '<h3 class="card-title" style="font-size:20px; margin:4px 0 8px">' + esc(n.title) + '</h3>' +
-          '<p class="card-body" style="margin:0">' + esc(n.body) + '</p>' +
+      var newsParams = new URLSearchParams(window.location.search);
+      var newsPostIndex = newsParams.has('post') ? parseInt(newsParams.get('post'), 10) : -1;
+      var selectedPost = data.news[newsPostIndex];
+
+      if (selectedPost) {
+        if (newsDetailNav) {
+          newsDetailNav.innerHTML = '<a href="news.html" style="font-size:13px; font-weight:700; color:var(--color-neutral-600)">← 목록으로</a>';
+        }
+        newsBoard.innerHTML =
+          '<article style="background:#fff">' +
+          '<div style="height:340px; overflow:hidden">' + photoOrPlaceholder(selectedPost.image, '소식 이미지', positionStyle(selectedPost.image_position)) + '</div>' +
+          '<div style="padding:28px">' +
+          '<div class="card-kicker" style="color:#d1491f">' + esc(selectedPost.date_label) + '</div>' +
+          '<h1 style="font-size:28px; margin:8px 0 18px">' + esc(selectedPost.title) + '</h1>' +
+          '<p style="white-space:pre-line; font-size:16px; line-height:1.85; margin:0">' + esc(selectedPost.body) + '</p>' +
           '</div></article>';
-      }).join('') : '<p style="padding:22px; background:#fff; color:var(--color-neutral-600)">아직 등록된 공지·소식이 없어요.</p>';
+      } else {
+        if (newsDetailNav) newsDetailNav.innerHTML = '';
+        newsBoard.innerHTML = data.news.length ? data.news.map(function (n, i) {
+          return '<a href="news.html?post=' + i + '" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 22px; background:#fff; text-decoration:none; color:inherit">' +
+            '<div>' +
+            '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
+            '<div style="font-size:16px; font-weight:700; color:#16233f; margin-top:2px">' + esc(n.title) + '</div>' +
+            '</div>' +
+            '<span aria-hidden="true" style="flex:none; color:var(--color-neutral-600)">→</span>' +
+            '</a>';
+        }).join('') : '<p style="padding:22px; background:#fff; color:var(--color-neutral-600)">아직 등록된 공지·소식이 없어요.</p>';
+      }
     }
 
     // Schedule
