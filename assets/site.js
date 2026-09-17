@@ -103,8 +103,9 @@
       } else {
         if (newsDetailNav) newsDetailNav.innerHTML = '';
         newsBoard.innerHTML = data.news.length ? data.news.map(function (n, i) {
-          return '<a href="news.html?post=' + i + '" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 22px; background:#fff; text-decoration:none; color:inherit">' +
-            '<div>' +
+          return '<a href="news.html?post=' + i + '" style="display:flex; align-items:center; gap:16px; padding:14px 22px; background:#fff; text-decoration:none; color:inherit">' +
+            '<div style="flex:none; width:64px; height:64px; border-radius:10px; overflow:hidden">' + photoOrPlaceholder(n.image, '', positionStyle(n.image_position)) + '</div>' +
+            '<div style="flex:1; min-width:0">' +
             '<div class="card-kicker" style="color:#d1491f">' + esc(n.date_label) + '</div>' +
             '<div style="font-size:16px; font-weight:700; color:#16233f; margin-top:2px">' + esc(n.title) + '</div>' +
             '</div>' +
