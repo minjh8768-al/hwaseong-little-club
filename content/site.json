@@ -63,6 +63,30 @@
       "destination": "파주율곡중학교",
       "note": "",
       "generation": "7"
+    },
+    {
+      "photo": "assets/uploads/graduate-강지환.jpg",
+      "name": "강지환",
+      "grad_year": "2025",
+      "destination": "라온중학교",
+      "note": "",
+      "generation": "6"
+    },
+    {
+      "photo": "assets/uploads/graduate-배민준.jpg",
+      "name": "배민준",
+      "grad_year": "2025",
+      "destination": "화성정남중학교",
+      "note": "",
+      "generation": "6"
+    },
+    {
+      "photo": "assets/uploads/graduate-오윤찬.jpg",
+      "name": "오윤찬",
+      "grad_year": "2025",
+      "destination": "서호중학교",
+      "note": "",
+      "generation": "6"
     }
   ],
   "join": {
